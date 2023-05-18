@@ -89,7 +89,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
               height: 28,
             ),
           ),
-          label: '아지트',
+          label: '덕질교실',
         ),
         BottomNavigationBarItem(
           icon: Padding(
