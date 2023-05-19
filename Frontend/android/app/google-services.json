@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "467165086553",
+    "project_id": "seniorgy-cf376",
+    "storage_bucket": "seniorgy-cf376.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467165086553:android:34f9f70ea3d08705f34248",
+        "android_client_info": {
+          "package_name": "com.example.seniorgy_app_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467165086553-qis8r5t1qt46bvvdd5fsirr3p6n1ksm0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.seniorgy_app_project",
+            "certificate_hash": "40b753b18afb58d276cbe4a48df6077e7922cacd"
+          }
+        },
+        {
+          "client_id": "467165086553-er67tfpf4vm939rh3booigqhlsg4lvs1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNwnYDSFRaXOM4gN2p3V6JJGGZW53pe1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "467165086553-9fb28qhg088cp25cekgbnd34nrjt24u8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "467165086553-i4s1041aj101perj6a1u41cp1mkuodm0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.seniorgyAppProject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

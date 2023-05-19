@@ -1,11 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'const/bottom_nav.dart';
+import 'home/views/app.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(
-    const MaterialApp(
+     MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
       debugShowCheckedModeBanner: false,
-      home: BottomNavigation(),
+      home: const AppBridgePage(),
     ),
   );
 }
