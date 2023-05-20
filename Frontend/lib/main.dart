@@ -7,12 +7,9 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   runApp(
-     MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
+     const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const AppBridgePage(),
+      home: AppBridgePage(),
     ),
   );
 }
