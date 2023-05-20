@@ -11,9 +11,9 @@ class _HideOutPageState extends State<HideOutPage> {
 
   TextEditingController searchController = TextEditingController();
 
-  List<String> titleList = ['새 친구 사귀기', '영웅봉사단'];
-  List<String> subTitleList = ['아기 영시들!', '영웅이의 선한영향력!'];
-  List<String> imgList = ['assets/images/Home/newFriend.png', 'assets/images/Home/angle.png'];
+  List<String> titleList = ['새 친구 사귀기', '영웅봉사단', '영웅굿즈', '영웅투어'];
+  List<String> subTitleList = ['아기 영시들!', '영웅이의 선한영향력!', '인형,큐브를 직업 만들자!', '영웅이의 발자취를 따라서'];
+  List<String> imgList = ['assets/images/HideOut/newFriend.png', 'assets/images/HideOut/angle.png', 'assets/images/HideOut/Present.png', 'assets/images/HideOut/Car.png'];
 
   @override
   Widget build(BuildContext context) {

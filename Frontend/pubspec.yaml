@@ -63,8 +63,12 @@ flutter:
 
   assets:
     - assets/images/Navigation/
-    - assets/images/Home/
+    - assets/images/HideOut/
+    - assets/images/Login/
+    - assets/images/MyPage/
+    - assets/images/Plaza/
     - assets/images/Const/
+    - assets/images/Home/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
