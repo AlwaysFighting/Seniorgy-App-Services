@@ -5,9 +5,8 @@ import 'login/views/app.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(
-     const MaterialApp(
+      const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AppBridgePage(),
     ),

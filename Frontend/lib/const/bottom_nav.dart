@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../hideout/views/hideout_main.dart';
+import 'package:seniorgy_app_project/main.dart';
+import 'package:seniorgy_app_project/meeting/views/meeting_main.dart';
 import '../home/views/homepage.dart';
 import '../mypage/views/mypage_main.dart';
-import '../plaza/views/plaza_main.dart';
+import '../plaza/views/study_main.dart';
 import 'color.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -22,8 +22,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
 // 이동할 페이지 Widget
   final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    const PlazaPage(),
-    const HideOutPage(),
+    const StudyPage(),
+    MeetingPage(),
     const MyPage(),
   ];
 
@@ -40,9 +40,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
   BottomNavigationBar _bottomNavigation() {
     return BottomNavigationBar(
       backgroundColor: Colors.white,
-      unselectedItemColor: sub2Text,
-      selectedLabelStyle: const TextStyle(color: mainColor),
-      unselectedLabelStyle: const TextStyle(color: sub2Text),
+      unselectedItemColor: const Color(0xFFBCBCBC),
+      unselectedLabelStyle: const TextStyle(
+          color: Colors.black, fontWeight: FontWeight.w400),
+      selectedLabelStyle: const  TextStyle(
+          color: mainColor, fontWeight: FontWeight.w400),
+      selectedItemColor: mainColor,
       selectedFontSize: 12,
       unselectedFontSize: 12,
       type: BottomNavigationBarType.fixed,
@@ -114,7 +117,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           icon: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Image.asset(
-              'assets/images/Navigation/MyProfile.png',
+              'assets/images/Navigation/MyProfileGrey.png',
               width: 28,
               height: 28,
             ),
@@ -122,7 +125,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           activeIcon: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Image.asset(
-              'assets/images/Navigation/MyProfile.png',
+              'assets/images/Navigation/MyProfileColor.png',
               width: 28,
               height: 28,
             ),
