@@ -39,38 +39,59 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 40, left: 20.0, right: 20.0),
+        padding: const EdgeInsets.only(top: 20, left: 20.0, right: 20.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width / 7,
-                        height: 6,
-                        color: mainColor,
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  children: [
+                    Row(
+                      children: List.generate(
+                        6,
+                            (index) => Padding(
+                              padding: const EdgeInsets.only(right: 2),
+                              child: Container(
+                          width: MediaQuery.of(context).size.width / 8,
+                          height: 6,
+                          decoration: BoxDecoration(
+                              color: index == 0 ? mainColor : const Color(0xFFF4F4F4),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(index == 0 ? 8 : 0),
+                                bottomLeft: Radius.circular(index == 0 ? 8 : 0),
+                                topRight: Radius.circular(index == 5 ? 8 : 0),
+                                bottomRight: Radius.circular(index == 5 ? 8 : 0),
+                              ),
+                          ),
+                        ),
+                            ),
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "1/",
-                        style: titleTextStyle.copyWith(
-                            fontWeight: FontWeight.w600, fontSize: 12.0),
-                      ),
-                      Text(
-                        "6",
-                        style: titleTextStyle.copyWith(
-                            fontWeight: FontWeight.w400, fontSize: 12.0),
-                      ),
-                    ],
-                  )
-                ],
+                    ),
+                    const SizedBox(width: 10.0),
+                    Row(
+                      children: [
+                        Text(
+                          "1/",
+                          style: titleTextStyle.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                        Text(
+                          "6",
+                          style: titleTextStyle.copyWith(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
+              const SizedBox(height: 28.0),
               Text("관련 키워드를 하나만 골라주세요", style: titleTextStyle),
               const SizedBox(height: 12.0),
               Text("나중에 변경할 수 있어요.", style: subTextStyle),
@@ -122,7 +143,7 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
                   );
                 }),
               ),
-              const SizedBox(height: 33.0),
+              const SizedBox(height: 20.0),
               SizedBox(
                 height: 48,
                 width: double.infinity,
