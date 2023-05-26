@@ -63,7 +63,7 @@ flutter:
 
   assets:
     - assets/images/Navigation/
-    - assets/images/HideOut/
+    - assets/images/Meeting/
     - assets/images/Login/
     - assets/images/MyPage/
     - assets/images/Plaza/
