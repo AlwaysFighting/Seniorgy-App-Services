@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seniorgy_app_project/main.dart';
 import 'package:seniorgy_app_project/meeting/views/meeting_main.dart';
 import '../home/views/homepage.dart';
 import '../mypage/views/mypage_main.dart';

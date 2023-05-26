@@ -2,6 +2,9 @@ import 'dart:ui';
 
 const mainColor = Color(0xFF4369EE);
 
+// 버튼 컬러
+const buttonDisabledColor = Color(0xFFD4E2FD);
+
 // 텍스트 컬러
 const mainTextColor = Color(0xFF000000);
 const sub1TextColor = Color(0xFFB3B3B3);

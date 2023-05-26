@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seniorgy_app_project/const/color.dart';
-import 'package:seniorgy_app_project/main.dart';
+import 'create_rooms.dart';
 
 class MeetingPage extends StatelessWidget {
   MeetingPage({Key? key}) : super(key: key);
@@ -19,6 +19,7 @@ class MeetingPage extends StatelessWidget {
     '영웅이의 발자취를 따라서',
     '내가수와 가까워지는 방법'
   ];
+
   List<String> imgList = [
     'assets/images/Meeting/CurrentLocation.png',
     'assets/images/Meeting/Volunteer.png',
@@ -97,7 +98,10 @@ class MeetingPage extends StatelessWidget {
                       const SizedBox(width: 20),
                       GestureDetector(
                         onTap: () {
-                          print("방 만들기");
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (BuildContext context) {
+                                return CreateRoomSettings();
+                              }));
                         },
                         child: Column(
                           children: [
