@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seniorgy_app_project/const/color.dart';
-import 'create_rooms.dart';
+import 'createRooms/create_rooms.dart';
 
 class MeetingPage extends StatelessWidget {
   MeetingPage({Key? key}) : super(key: key);
@@ -116,7 +116,7 @@ class MeetingPage extends StatelessWidget {
                                   ),
                                   child: Center(
                                     child: Image.asset(
-                                      'assets/images/Const/Plus_grey.png',
+                                      'assets/images/Const/Plus.png',
                                       width: 36,
                                       height: 36,
                                     ),

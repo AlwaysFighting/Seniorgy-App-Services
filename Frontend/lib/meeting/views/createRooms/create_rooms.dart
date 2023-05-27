@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../const/color.dart';
-import '../../const/custom_back.dart';
+import '../../../const/color.dart';
+import '../../../const/custom_back.dart';
+import 'create_room_location_step.dart';
 
 class CreateRoomSettings extends StatefulWidget {
   CreateRoomSettings({Key? key}) : super(key: key);
@@ -144,30 +145,53 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
                 }),
               ),
               const SizedBox(height: 20.0),
-              SizedBox(
-                height: 48,
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    backgroundColor:
-                        _isNextButtonEnabled ? mainColor : buttonDisabledColor,
-                    elevation: 0,
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    "다음",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+              NextButton(isNextButtonEnabled: _isNextButtonEnabled, selectedGridIndex: selectedGridIndex),
               const SizedBox(height: 40.0),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NextButton extends StatelessWidget {
+  const NextButton({
+    super.key,
+    required bool isNextButtonEnabled,
+    required this.selectedGridIndex,
+  }) : _isNextButtonEnabled = isNextButtonEnabled;
+
+  final bool _isNextButtonEnabled;
+  final int selectedGridIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 48,
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0)),
+          backgroundColor:
+              _isNextButtonEnabled ? mainColor : buttonDisabledColor,
+          elevation: 0,
+        ),
+        onPressed: () {
+          if(_isNextButtonEnabled && selectedGridIndex == 0 || _isNextButtonEnabled && selectedGridIndex == 1) {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return CreateRoomLocation();
+                }));
+          }
+        },
+        child: const Text(
+          "다음",
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 16.0,
+            color: Colors.white,
           ),
         ),
       ),
