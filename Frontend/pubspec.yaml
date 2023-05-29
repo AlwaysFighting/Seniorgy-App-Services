@@ -69,6 +69,7 @@ flutter:
     - assets/images/Plaza/
     - assets/images/Const/
     - assets/images/Home/
+    - assets/images/Picture/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
