@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../const/color.dart';
 import '../../../const/custom_back.dart';
@@ -20,6 +24,19 @@ class _UploadPictureRoomsState extends State<UploadPictureRooms> {
       color: sub2TextColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   bool _isNextButtonEnabled = true;
+
+  File? _selectedImage;
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedImage != null) {
+      setState(() {
+        _selectedImage = File(pickedImage.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,24 +113,40 @@ class _UploadPictureRoomsState extends State<UploadPictureRooms> {
                   Text("방을 소개하는 사진을 올려주세요", style: titleTextStyle),
                   const SizedBox(height: 110.0),
                   Center(
-                    child: Container(
-                      width: 200,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFE8EBEF),
-                          width: 1,
-                        ),
-                        color: const Color(0xFFF4F6F8),
-                        borderRadius: BorderRadius.circular(200.0),
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.add,
-                          size: 50,
-                          color: Color(0xFFA6ADBB),
-                        ),
-                      ),
+                    child: GestureDetector(
+                      onTap: () {
+                        _pickImage();
+                      },
+                      child: _selectedImage != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(200.0),
+                              // 원하는 둥근 정도 설정
+                              child: SizedBox(
+                                width: 200.0, // 원하는 너비 설정
+                                height: 200.0, // 원하는 높이 설정
+                                child: Image.file(_selectedImage!,
+                                    fit: BoxFit.cover),
+                              ),
+                            )
+                          : Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: const Color(0xFFE8EBEF),
+                                  width: 1,
+                                ),
+                                color: const Color(0xFFF4F6F8),
+                                borderRadius: BorderRadius.circular(200.0),
+                              ),
+                              child: const Center(
+                                child: Icon(
+                                  Icons.add,
+                                  size: 50,
+                                  color: Color(0xFFA6ADBB),
+                                ),
+                              ),
+                            ),
                     ),
                   ),
                   const SizedBox(height: 205.0),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:seniorgy_app_project/meeting/views/meeting_main.dart';
 import '../home/views/homepage.dart';
 import '../mypage/views/mypage_main.dart';
-import '../plaza/views/study_main.dart';
 import 'color.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -21,7 +20,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
 // 이동할 페이지 Widget
   final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    const StudyPage(),
     MeetingPage(),
     const MyPage(),
   ];
@@ -78,7 +76,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           icon: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Image.asset(
-              'assets/images/Navigation/ClassGrey.png',
+              'assets/images/Navigation/MeetingRoom_Grey.png',
               width: 28,
               height: 28,
             ),
@@ -86,31 +84,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
           activeIcon: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Image.asset(
-              'assets/images/Navigation/ClassColor.png',
+              'assets/images/Navigation/MeetingRoom_Color.png',
               width: 28,
               height: 28,
             ),
           ),
-          label: '덕질교실',
-        ),
-        BottomNavigationBarItem(
-          icon: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Image.asset(
-              'assets/images/Navigation/HideoutGrey.png',
-              width: 28,
-              height: 28,
-            ),
-          ),
-          activeIcon: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Image.asset(
-              'assets/images/Navigation/HideoutColor.png',
-              width: 28,
-              height: 28,
-            ),
-          ),
-          label: '아지트',
+          label: '모임방',
         ),
         BottomNavigationBarItem(
           icon: Padding(
