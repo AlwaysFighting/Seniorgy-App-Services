@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:seniorgy_app_project/mypage/views/mypage_main.dart';
-
 import '../../const/color.dart';
 
-class OnBoardingUserName extends StatelessWidget {
+class OnBoardingUserName extends StatefulWidget {
   const OnBoardingUserName({Key? key}) : super(key: key);
 
+  @override
+  State<OnBoardingUserName> createState() => _OnBoardingUserNameState();
+}
+
+class _OnBoardingUserNameState extends State<OnBoardingUserName> {
   final titleTextStyle = const TextStyle(
       color: Colors.white,
       fontSize: 30,
@@ -23,6 +26,20 @@ class OnBoardingUserName extends StatelessWidget {
       fontSize: 20,
       fontWeight: FontWeight.w700,
       fontFamily: 'Pretendard');
+
+  bool showFirstText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() {
+          showFirstText = false;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,28 +62,53 @@ class OnBoardingUserName extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "안녕 나는 팬키야",
-                style: subTextStyle.copyWith(fontSize: 30.0),
-              ),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: '영웅님의 팬',
-                      style: titleTextStyle,
-                    ),
-                    TextSpan(
-                      text: '인',
+              showFirstText
+                  ? Text(
+                      "안녕하세요.",
                       style: subTextStyle.copyWith(fontSize: 30.0),
-                    ),
-                  ],
-                ),
-              ),
-              Text(
-                "너를 뭐라고 부르면될까?",
-                style: subTextStyle.copyWith(fontSize: 30.0),
-              ),
+                    )
+                  : AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '영웅시대',
+                              style: titleTextStyle,
+                            ),
+                            TextSpan(
+                              text: '인 당신을',
+                              style: subTextStyle.copyWith(fontSize: 30.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                  ),
+              AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  child: showFirstText
+                      ? RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '저는',
+                                style: subTextStyle.copyWith(fontSize: 30.0),
+                              ),
+                              TextSpan(
+                                text: '팬키',
+                                style: titleTextStyle,
+                              ),
+                              TextSpan(
+                                text: '에요!',
+                                style: subTextStyle.copyWith(fontSize: 30.0),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Text(
+                          '뭐라고 부르면 될까요?',
+                          style: subTextStyle.copyWith(fontSize: 30.0),
+                        )),
               const SizedBox(height: 32.0),
               SizedBox(
                 height: 116,
@@ -76,7 +118,7 @@ class OnBoardingUserName extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40.0),
-              Column(
+              !showFirstText ? Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Stack(
@@ -107,7 +149,7 @@ class OnBoardingUserName extends StatelessWidget {
                     ],
                   ),
                 ],
-              ),
+              ) : Container(),
             ],
           ),
         ),
@@ -121,13 +163,13 @@ class OnBoardingUserName extends StatelessWidget {
             onPrimary: Colors.white,
             elevation: 0.0,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0.0)
-            ),
+                borderRadius: BorderRadius.circular(0.0)),
           ),
-          onPressed: () {
-
-          },
-          child: Text('다음', style: buttonTextStyle,),
+          onPressed: () {},
+          child: Text(
+            '다음',
+            style: buttonTextStyle,
+          ),
         ),
       ),
     );

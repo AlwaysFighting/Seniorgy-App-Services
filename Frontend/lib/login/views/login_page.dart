@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
 
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) {
-              return const BottomNavigation();
+              return const OnBoardingUserName();
             }));
         print('카카오계정3으로 로그인 성공');
       } catch (error) {
