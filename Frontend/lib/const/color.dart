@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 const mainColor = Color(0xFF4369EE);
+const loginBackgroundColor = Color(0xFF0600FF);
 
 // 버튼 컬러
 const buttonDisabledColor = Color(0xFFD4E2FD);

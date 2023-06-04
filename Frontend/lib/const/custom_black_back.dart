@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomBackButton extends StatelessWidget {
-  const CustomBackButton({
+class CustomBackBButton extends StatelessWidget {
+  const CustomBackBButton({
     super.key,
   });
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../const/color.dart';
-import '../../../const/custom_back.dart';
+import '../../../const/custom_black_back.dart';
 import 'create_room_picture.dart';
 
 class IntroduceRooms extends StatefulWidget {
@@ -35,7 +35,7 @@ class _IntroduceRoomsState extends State<IntroduceRooms> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: const CustomBackButton(),
+        leading: const CustomBackBButton(),
         backgroundColor: Colors.white,
         elevation: 0,
       ),

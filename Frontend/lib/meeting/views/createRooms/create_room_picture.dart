@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../const/color.dart';
-import '../../../const/custom_back.dart';
+import '../../../const/custom_black_back.dart';
 import 'create_room_setting.dart';
 
 class UploadPictureRooms extends StatefulWidget {
@@ -42,7 +42,7 @@ class _UploadPictureRoomsState extends State<UploadPictureRooms> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: const CustomBackButton(),
+        leading: const CustomBackBButton(),
         backgroundColor: Colors.white,
         elevation: 0,
       ),

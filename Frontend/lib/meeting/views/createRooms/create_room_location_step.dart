@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../const/color.dart';
-import '../../../const/custom_back.dart';
+import '../../../const/custom_black_back.dart';
+import '../../models/kakaomap.dart';
 import 'create_room_introduce.dart';
 
 class CreateRoomLocation extends StatefulWidget {
@@ -25,7 +26,7 @@ class _CreateRoomLocationState
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: const CustomBackButton(),
+        leading: const CustomBackBButton(),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -98,11 +99,7 @@ class _CreateRoomLocationState
               ),
             ),
           ),
-          Container(
-            color: mainColor,
-            height: 331,
-            width: double.infinity,
-          ),
+          const KakaoMapView(deptLat: 37.62915393610253, deptLng: 127.09569185257587,),
           Column(
             children: [
               Padding(
@@ -136,7 +133,6 @@ class _CreateRoomLocationState
                     children: [
                       SizedBox(
                         height: 15,
-                        width: 15,
                         child: Image.asset(
                           "assets/images/Const/location_current.png",
                           fit: BoxFit.cover,

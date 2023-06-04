@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../const/color.dart';
-import '../../../const/custom_back.dart';
+import '../../../const/custom_black_back.dart';
 import 'create_final_room.dart';
 
 class SettingRooms extends StatefulWidget {
@@ -41,7 +41,7 @@ class _SettingRoomsState extends State<SettingRooms> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: const CustomBackButton(),
+          leading: const CustomBackBButton(),
           backgroundColor: Colors.white,
           elevation: 0,
         ),
