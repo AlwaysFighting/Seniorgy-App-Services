@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:seniorgy_app_project/login/views/login_page.dart';
 
 import '../../const/bottom_nav.dart';
+import 'agreement_page.dart';
 import 'onboarding_user_name.dart';
 
 class AppBridgePage extends StatelessWidget {
@@ -43,6 +44,10 @@ class AppBridgePage extends StatelessWidget {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
+                  }
+                  if (snapshot.data?.docs.isEmpty == true ||
+                      snapshot.data?.docs.first.get('agreement') == false) {
+                    return const AgreementPage();
                   }
                   if (snapshot.data?.docs.isEmpty == true ||
                       snapshot.data?.docs.first.get('register') == false) {

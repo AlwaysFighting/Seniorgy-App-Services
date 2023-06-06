@@ -400,18 +400,55 @@ class _MyMeetingHomeState extends State<MyMeetingHome> {
                               padding: const EdgeInsets.only(bottom: 12.0),
                               child: Row(
                                 children: [
-                                  ClipOval(
-                                    child: Image.network(
-                                      imgURL[index],
-                                      width: 42,
-                                      height: 42,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                                  index == 0
+                                      ? Stack(
+                                          children: [
+                                            ClipOval(
+                                              child: Image.network(
+                                                imgURL[index],
+                                                width: 42,
+                                                height: 42,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Positioned(
+                                              bottom: 0,
+                                              right: 0,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: const Color(0xFF01CFFE),
+                                                  borderRadius:
+                                                      BorderRadius.circular(50.0),
+                                                ),
+                                                height: 17.02,
+                                                width: 17.02,
+                                                child: Center(
+                                                  child: SizedBox(
+                                                    height: 9.36,
+                                                    width: 9.36,
+                                                    child: Image.asset(
+                                                      "assets/images/Meeting/KingIcon.png",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      : ClipOval(
+                                          child: Image.network(
+                                            imgURL[index],
+                                            width: 42,
+                                            height: 42,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                   const SizedBox(width: 10.0),
                                   Text(
                                     memberName[index],
-                                    style: textTextStyle.copyWith(fontSize: 14.0),
+                                    style:
+                                        textTextStyle.copyWith(fontSize: 14.0),
                                   )
                                 ],
                               ),
