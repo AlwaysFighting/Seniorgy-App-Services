@@ -116,18 +116,15 @@ class _CreateRoomLocationState
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20.0, top: 16.0),
-            child: SizedBox(
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFFE9F2FF),
+                borderRadius: BorderRadius.circular(20.0),
+              ),
               height: 35.0,
-              width: 145.0,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFE9F2FF),
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)
-                  ),
-                ),
+              width: 145,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Center(
                   child: Row(
                     children: [

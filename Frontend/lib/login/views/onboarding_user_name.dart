@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:seniorgy_app_project/login/views/onboarding_profile.dart';
 import '../../const/bottom_nav.dart';
 import '../../const/color.dart';
 
@@ -11,6 +12,7 @@ class OnBoardingUserName extends StatefulWidget {
 }
 
 class _OnBoardingUserNameState extends State<OnBoardingUserName> {
+
   final titleTextStyle = const TextStyle(
       color: Colors.white,
       fontSize: 30,
@@ -31,6 +33,15 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
 
   bool showFirstText = true;
 
+  final _textEditingController = TextEditingController();
+  bool _isNextButtonEnabled = false;
+
+  void _updateLoginButtonState() {
+    setState(() {
+      _isNextButtonEnabled = _textEditingController.text.isNotEmpty;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -44,12 +55,27 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainBlueColor,
       appBar: AppBar(
         backgroundColor: mainBlueColor,
         elevation: 0,
+        leading: IconButton(
+          icon: Image.asset(
+            'assets/images/Const/Back_White.png',
+            width: 31,
+            height: 31,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 23, top: 20.0),
@@ -58,85 +84,93 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              showFirstText
-                  ? Text(
-                      "안녕하세요.",
-                      style: subTextStyle.copyWith(fontSize: 30.0),
-                    )
-                  : AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 500),
-                    child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '영웅시대',
-                              style: titleTextStyle,
-                            ),
-                            TextSpan(
-                              text: '인 당신을',
-                              style: subTextStyle.copyWith(fontSize: 30.0),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ),
-              AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  child: showFirstText
-                      ? RichText(
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                showFirstText
+                    ? Text(
+                        "안녕하세요.",
+                        style: subTextStyle.copyWith(fontSize: 30.0),
+                      )
+                    : AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 500),
+                      child: RichText(
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: '저는',
-                                style: subTextStyle.copyWith(fontSize: 30.0),
-                              ),
-                              TextSpan(
-                                text: '팬키',
+                                text: '영웅시대',
                                 style: titleTextStyle,
                               ),
                               TextSpan(
-                                text: '에요!',
+                                text: '인 당신을',
                                 style: subTextStyle.copyWith(fontSize: 30.0),
                               ),
                             ],
                           ),
-                        )
-                      : Text(
-                          '뭐라고 부르면 될까요?',
-                          style: subTextStyle.copyWith(fontSize: 30.0),
-                        )),
-              const SizedBox(height: 32.0),
-              SizedBox(
-                height: 116,
-                child: Image.asset(
-                  "assets/images/Login/Pinky.png",
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(height: 40.0),
-              !showFirstText ? Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Stack(
-                        children: [
-                          SizedBox(
-                            height: 156,
-                            child: Image.asset(
-                              "assets/images/Login/LoginChat.png",
-                              fit: BoxFit.cover,
+                        ),
+                    ),
+                AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: showFirstText
+                        ? RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: '저는',
+                                  style: subTextStyle.copyWith(fontSize: 30.0),
+                                ),
+                                TextSpan(
+                                  text: '팬키',
+                                  style: titleTextStyle,
+                                ),
+                                TextSpan(
+                                  text: '에요!',
+                                  style: subTextStyle.copyWith(fontSize: 30.0),
+                                ),
+                              ],
                             ),
+                          )
+                        : Text(
+                            '뭐라고 부르면 될까요?',
+                            style: subTextStyle.copyWith(fontSize: 30.0),
+                          )),
+                const SizedBox(height: 32.0),
+                SizedBox(
+                  height: 116,
+                  child: Image.asset(
+                    "assets/images/Login/Pinky.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(height: 40.0),
+                !showFirstText ? SizedBox(
+                  height: 156,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        right: 0,
+                        child: SizedBox(
+                          width: 307.45,
+                          child: Image.asset(
+                            "assets/images/Login/LoginChat.png",
+                            fit: BoxFit.cover,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                        ),
+                      ),
+                      Positioned(
+                        right: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 35.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               const SizedBox(height: 12.0),
                               Text(
@@ -148,19 +182,23 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   SizedBox(
-                                    width: 186.0,
+                                    width: 200.0,
                                     height: 36.0,
                                     child: TextField(
-                                      textAlign: TextAlign.start,
+                                      onChanged: (value) {
+                                        _updateLoginButtonState();
+                                      },
+                                      controller: _textEditingController,
+                                      textAlign: TextAlign.center,
                                       inputFormatters: <TextInputFormatter>[
                                         FilteringTextInputFormatter.singleLineFormatter,
                                         LengthLimitingTextInputFormatter(8),
                                       ],
-                                      style: const TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.w300, fontFamily: 'PyeongChangPeace'),
+                                      style: !_isNextButtonEnabled ? const TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.w300, fontFamily: 'PyeongChangPeace') : const TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.w300, fontFamily: 'PyeongChangPeace'),
                                       decoration: InputDecoration(
                                         filled: true,
                                         contentPadding: const EdgeInsets.symmetric(horizontal: 45.0, vertical: 9),
-                                        fillColor: const Color(0x20EEEEEE), // 배경색 설정
+                                        fillColor: !_isNextButtonEnabled ? const Color(0x20EEEEEE) : Colors.white,
                                         hintText: '예시) 부천웅',
                                         hintStyle: const TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.w300, fontFamily: 'PyeongChangPeace'),
                                         border: UnderlineInputBorder(
@@ -179,13 +217,13 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
                               ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
-                ],
-              ) : Container(),
-            ],
+                ) : Container(),
+              ],
+            ),
           ),
         ),
       ),
@@ -194,17 +232,19 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
         height: 72.0,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: const Color(0xFFDBDBDC),
+            primary: !_isNextButtonEnabled ? const Color(0xFFDBDBDC) : Colors.black,
             onPrimary: Colors.white,
             elevation: 0.0,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0.0)),
           ),
           onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return const BottomNavigation(currentIndex: 0,);
-                }));
+            if (_isNextButtonEnabled == true) {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return const OnBoardingProfile();
+                  }));
+            }
           },
           child: Text(
             '다음',

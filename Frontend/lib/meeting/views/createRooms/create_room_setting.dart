@@ -37,8 +37,6 @@ class _SettingRoomsState extends State<SettingRooms> {
   @override
   Widget build(BuildContext context) {
 
-    final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -48,8 +46,7 @@ class _SettingRoomsState extends State<SettingRooms> {
           backgroundColor: Colors.white,
           elevation: 0,
         ),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height - keyboardHeight,
+        body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

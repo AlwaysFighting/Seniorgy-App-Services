@@ -47,6 +47,14 @@ class ExplorationPage extends StatelessWidget {
     '스밍스터디방'
   ];
 
+  List<String> roomTag = [
+    '봉사',
+    '봉사',
+    '동네친구',
+    '굿즈',
+    '스터디'
+  ];
+
   List<String> roomSubTitle = [
     '부천에서 웅이의 영향력을 펼치다!',
     '경기에 영웅님의 사랑을 전하다',
@@ -210,9 +218,25 @@ class ExplorationPage extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  roomTitle[index],
-                                                  style: textTextStyle,
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      height: 23.0,
+                                                      decoration: BoxDecoration(
+                                                        color: subBlueColor,
+                                                        borderRadius: BorderRadius.circular(100.0),
+                                                      ),
+                                                      child: Center(child: Padding(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                                        child: Text(roomTag[index], style: textTextStyle.copyWith(fontWeight: FontWeight.w600, fontSize: 12.0, color: Colors.white)),
+                                                      )),
+                                                    ),
+                                                    const SizedBox(width: 8.0),
+                                                    Text(
+                                                      roomTitle[index],
+                                                      style: textTextStyle,
+                                                    ),
+                                                  ],
                                                 ),
                                                 const SizedBox(height: 5.0),
                                                 Text(
