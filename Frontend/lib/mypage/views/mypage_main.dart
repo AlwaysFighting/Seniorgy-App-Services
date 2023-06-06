@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../login/views/login_page.dart';
+import '../../main.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -24,10 +25,7 @@ class MyPage extends StatelessWidget {
                     child: const Text("로그아웃"),
                     onPressed: () {
                       FirebaseAuth.instance.signOut();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LoginPage()),
-                      );
+                      runApp(const MyApp());
                     },
                   ),
                 ],

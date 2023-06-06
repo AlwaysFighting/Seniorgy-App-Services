@@ -178,7 +178,7 @@ class _MyMeetingHomeState extends State<MyMeetingHome> {
                                             ),
                                           ),
                                           const SizedBox(width: 5.0),
-                                          Text("오전 11:00", style: textTextStyle.copyWith(fontSize: 12.0)),
+                                          Text("오전 11:00", style: textTextStyle.copyWith(fontSize: 12.0, color: const Color(0xFFC8C8C8))),
                                           const SizedBox(width: 19.0),
                                           SizedBox(
                                             height : 11.5,
@@ -189,7 +189,7 @@ class _MyMeetingHomeState extends State<MyMeetingHome> {
                                             ),
                                           ),
                                           const SizedBox(width: 5.0),
-                                          Text("종로구 13길 경복궁..", style: textTextStyle.copyWith(fontSize: 12.0)),
+                                          Text("종로구 13길 경복궁..", style: textTextStyle.copyWith(fontSize: 12.0, color: const Color(0xFFC8C8C8))),
                                         ],
                                       )
                                     ],
@@ -222,7 +222,7 @@ class _MyMeetingHomeState extends State<MyMeetingHome> {
                                             ),
                                           ),
                                           const SizedBox(width: 5.0),
-                                          Text("오후 06:16", style: textTextStyle.copyWith(fontSize: 12.0)),
+                                          Text("오후 06:16", style: textTextStyle.copyWith(fontSize: 12.0, color: const Color(0xFFC8C8C8))),
                                         ],
                                       )
                                     ],

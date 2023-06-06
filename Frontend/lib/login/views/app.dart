@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:seniorgy_app_project/login/views/agreement_page.dart';
 import 'package:seniorgy_app_project/login/views/login_page.dart';
 
 import '../../const/bottom_nav.dart';
-import 'agreement_page.dart';
-import 'onboarding_user_name.dart';
 
 class AppBridgePage extends StatelessWidget {
   const AppBridgePage({Key? key}) : super(key: key);
@@ -13,28 +12,18 @@ class AppBridgePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
+      body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text('Error occurred'),
-            );
-          } else if (!snapshot.hasData) {
+          if (!snapshot.hasData || snapshot.data?.uid == null) {
             return const LoginPage();
           } else {
             User? user = snapshot.data;
-            if (user != null && user.displayName == null) {
-              return const OnBoardingUserName();
-            } else {
-              CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
-              return StreamBuilder<QuerySnapshot>(
-                stream: userCollection.where('uid', isEqualTo: user?.uid).snapshots(),
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (user != null && user.uid.isNotEmpty) {
+              CollectionReference userCollection = FirebaseFirestore.instance.collection('User');
+              return StreamBuilder<DocumentSnapshot>(
+                stream: userCollection.doc(user.uid).snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                   if (snapshot.hasError) {
                     return const Center(
                       child: Text('Error occurred'),
@@ -45,22 +34,24 @@ class AppBridgePage extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     );
                   }
-                  if (snapshot.data?.docs.isEmpty == true ||
-                      snapshot.data?.docs.first.get('agreement') == false) {
+                  if (!snapshot.hasData || snapshot.data?.data() == null) {
+                    return const LoginPage();
+                  }
+                  Map<String, dynamic>? userData = snapshot.data?.data() as Map<String, dynamic>?;
+                  bool register = userData?['register'] ?? false;
+                  if (register == false) {
                     return const AgreementPage();
+                  } else {
+                    return const BottomNavigation(currentIndex: 0,);
                   }
-                  if (snapshot.data?.docs.isEmpty == true ||
-                      snapshot.data?.docs.first.get('register') == false) {
-                    return const OnBoardingUserName();
-                  }
-                  // 구글 로그인 후 첫 페이지로 표시할 페이지
-                  return const BottomNavigation();
                 },
               );
+            } else {
+              return const LoginPage();
             }
           }
         },
-      ),
+      )
     );
   }
 }

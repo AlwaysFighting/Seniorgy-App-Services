@@ -5,7 +5,8 @@ import '../search/views/exploration.dart';
 import 'color.dart';
 
 class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({Key? key}) : super(key: key);
+  const BottomNavigation({Key? key, required this.currentIndex}) : super(key: key);
+  final int currentIndex;
 
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
@@ -23,6 +24,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
     MeetingPage(),
     const MyPage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.currentIndex;
+  }
 
   @override
   Widget build(BuildContext context) {

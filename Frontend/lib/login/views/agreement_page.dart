@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:seniorgy_app_project/login/views/onboarding_user_name.dart';
 
@@ -33,29 +31,6 @@ class _AgreementPageState extends State<AgreementPage> {
       fontFamily: 'Pretendard');
 
   bool isChecked = false;
-
-  void updateAgreementField() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      print('사용자가 인증되지 않았습니다.');
-      return;
-    }
-
-    String collectionPath = 'User';
-    String documentId = user.uid;
-
-    DocumentReference documentReference =
-    FirebaseFirestore.instance.collection(collectionPath).doc(documentId);
-
-    Map<String, dynamic> data = {'agreement': true};
-
-    try {
-      await documentReference.update(data);
-      print('약관 동의 완료');
-    } catch (error) {
-      print('약관 동의 업데이트 실패: $error');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +201,6 @@ class _AgreementPageState extends State<AgreementPage> {
           ),
           onPressed: () {
             if (isChecked == true) {
-              updateAgreementField();
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (BuildContext context) {
                     return const OnBoardingUserName();

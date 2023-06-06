@@ -7,6 +7,7 @@ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 import '../../const/bottom_nav.dart';
 import '../../const/color.dart';
+import 'agreement_page.dart';
 import 'onboarding_user_name.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,36 +31,36 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<void> addCollection() async {
-
-    var user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      print('사용자가 인증되지 않았습니다.');
-      return;
-    }
-
-    print("user : $user");
-
-    String collectionPath = 'User';
-    String documentId = user.uid;
-
-    CollectionReference collectionReference =
-    FirebaseFirestore.instance.collection(collectionPath);
-
-    // 컬렉션 추가
-    collectionReference
-        .doc(documentId)
-        .set({
-      'register' : false,
-      'agreement' : false,
-    })
-        .then((documentReference) {
-      print('컬렉션 추가 완료');
-    })
-        .catchError((error) {
-      print('컬렉션 추가 실패: $error');
-    });
-  }
+  // Future<void> addCollection() async {
+  //
+  //   var user = FirebaseAuth.instance.currentUser;
+  //   if (user == null) {
+  //     print('사용자가 인증되지 않았습니다.');
+  //     return;
+  //   }
+  //
+  //   print("user : $user");
+  //
+  //   String collectionPath = 'User';
+  //   String documentId = user.uid;
+  //
+  //   CollectionReference collectionReference =
+  //   FirebaseFirestore.instance.collection(collectionPath);
+  //
+  //   // 컬렉션 추가
+  //   collectionReference
+  //       .doc(documentId)
+  //       .set({
+  //     'register' : false,
+  //     'login' : true,
+  //   })
+  //       .then((documentReference) {
+  //     print('컬렉션 추가 완료');
+  //   })
+  //       .catchError((error) {
+  //     print('컬렉션 추가 실패: $error');
+  //   });
+  // }
 
   // Google Login
   Future<UserCredential> signInWithGoogle() async {
@@ -76,7 +77,6 @@ class _LoginPageState extends State<LoginPage> {
     UserCredential userCredential =
     await FirebaseAuth.instance.signInWithCredential(credential);
 
-    await addCollection();
     return userCredential;
   }
 
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
         await UserApi.instance.loginWithKakaoTalk();
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) {
-              return const BottomNavigation();
+              return const BottomNavigation(currentIndex: 0,);
             }));
         print('카카오톡으로 로그인 성공');
       } catch (error) {
@@ -212,7 +212,9 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   height: 47.0,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+
+                    },
                     style: OutlinedButton.styleFrom(
                         foregroundColor: const Color(0xFFD9D9D9),
                         primary: const Color(0xFFD9D9D9),

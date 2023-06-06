@@ -203,7 +203,7 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
           onPressed: () {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) {
-                  return BottomNavigation();
+                  return const BottomNavigation(currentIndex: 0,);
                 }));
           },
           child: Text(

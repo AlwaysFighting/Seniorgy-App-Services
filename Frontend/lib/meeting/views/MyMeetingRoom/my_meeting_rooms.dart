@@ -51,6 +51,7 @@ class _MyMeetingRoomsState extends State<MyMeetingRooms> {
           appBar: AppBar(
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
+            centerTitle: true,
             elevation: 0,
             title: RichText(
               text: TextSpan(

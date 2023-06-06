@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../const/bottom_nav.dart';
 import '../../../const/color.dart';
 
 class FinalCreateRoomSteps extends StatefulWidget {
@@ -120,6 +121,11 @@ class _FinalCreateRoomStepsState extends State<FinalCreateRoomSteps> {
                   child: ElevatedButton(
                     onPressed: () {
                       print("완료!");
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => const BottomNavigation(currentIndex: 1,)),
+                            (Route<dynamic> route) => false,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Colors.white,
