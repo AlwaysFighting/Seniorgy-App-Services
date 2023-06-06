@@ -16,7 +16,7 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
       color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600);
 
   final subTextStyle = const TextStyle(
-      color: sub2TextColor, fontSize: 14, fontWeight: FontWeight.w400);
+      color: grey2TextColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   List<String> titleList = ['동네 친구', '봉사', '굿즈', '투어', '스터디'];
   List<String> imgList = [

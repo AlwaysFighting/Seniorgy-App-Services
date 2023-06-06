@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../../const/bottom_nav.dart';
 import '../../const/color.dart';
 
 class OnBoardingUserName extends StatefulWidget {
@@ -44,9 +46,9 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: loginBackgroundColor,
+      backgroundColor: mainBlueColor,
       appBar: AppBar(
-        backgroundColor: loginBackgroundColor,
+        backgroundColor: mainBlueColor,
         elevation: 0,
         actions: [
           Padding(
@@ -121,31 +123,64 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
               !showFirstText ? Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Stack(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(
-                        height: 156,
-                        child: Image.asset(
-                          "assets/images/Login/LoginChat.png",
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Positioned(
-                        top: 12.0,
-                        right: 35.0,
-                        child: Text(
-                          '안녕 나는 영웅님의 팬',
-                          style: subTextStyle.copyWith(fontSize: 20.0),
-                        ),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: '예시) 부천웅',
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide.none,
+                      Stack(
+                        children: [
+                          SizedBox(
+                            height: 156,
+                            child: Image.asset(
+                              "assets/images/Login/LoginChat.png",
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                      )
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const SizedBox(height: 12.0),
+                              Text(
+                                '안녕 나는 영웅님의 팬',
+                                style: subTextStyle.copyWith(fontSize: 20.0),
+                              ),
+                              const SizedBox(height: 8.0),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    width: 186.0,
+                                    height: 36.0,
+                                    child: TextField(
+                                      textAlign: TextAlign.start,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.singleLineFormatter,
+                                        LengthLimitingTextInputFormatter(8),
+                                      ],
+                                      style: const TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.w300, fontFamily: 'PyeongChangPeace'),
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        contentPadding: const EdgeInsets.symmetric(horizontal: 45.0, vertical: 9),
+                                        fillColor: const Color(0x20EEEEEE), // 배경색 설정
+                                        hintText: '예시) 부천웅',
+                                        hintStyle: const TextStyle(color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.w300, fontFamily: 'PyeongChangPeace'),
+                                        border: UnderlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 5.0),
+                                  Text(
+                                    '야',
+                                    style: subTextStyle.copyWith(fontSize: 20.0),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ],
@@ -165,7 +200,12 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0.0)),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return BottomNavigation();
+                }));
+          },
           child: Text(
             '다음',
             style: buttonTextStyle,

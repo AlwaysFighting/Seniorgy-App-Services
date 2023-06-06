@@ -17,7 +17,7 @@ class _IntroduceRoomsState extends State<IntroduceRooms> {
       color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600);
 
   final subTextStyle = const TextStyle(
-      color: sub2TextColor, fontSize: 14, fontWeight: FontWeight.w400);
+      color: grey2TextColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   final _roomTitleController = TextEditingController();
   final _introduceRoomController = TextEditingController();

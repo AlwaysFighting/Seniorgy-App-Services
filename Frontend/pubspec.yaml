@@ -73,9 +73,10 @@ flutter:
     - assets/images/MyPage/
     - assets/images/Plaza/
     - assets/images/Const/
-    - assets/images/Home/
+    - assets/images/Search/
     - assets/images/Picture/
     - assets/images/Login/
+    - assets/images/Character/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -111,6 +112,13 @@ flutter:
       fonts:
         - asset: assets/fonts/Pretendard-Bold.otf
           weight: 700
+        - asset: assets/fonts/Pretendard-Medium.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Regular.otf
+          weight: 500
+        - asset: assets/fonts/Pretendard-Light.otf
+          weight: 300
+
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
