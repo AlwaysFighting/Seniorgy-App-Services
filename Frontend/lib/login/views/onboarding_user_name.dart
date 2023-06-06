@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:seniorgy_app_project/login/views/onboarding_profile.dart';
-import '../../const/bottom_nav.dart';
 import '../../const/color.dart';
 
 class OnBoardingUserName extends StatefulWidget {
