@@ -24,6 +24,10 @@ class MyPage extends StatelessWidget {
                     child: const Text("로그아웃"),
                     onPressed: () {
                       FirebaseAuth.instance.signOut();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginPage()),
+                      );
                     },
                   ),
                 ],

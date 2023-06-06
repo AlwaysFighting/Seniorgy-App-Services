@@ -30,6 +30,37 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  Future<void> addCollection() async {
+
+    var user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print('사용자가 인증되지 않았습니다.');
+      return;
+    }
+
+    print("user : $user");
+
+    String collectionPath = 'User';
+    String documentId = user.uid;
+
+    CollectionReference collectionReference =
+    FirebaseFirestore.instance.collection(collectionPath);
+
+    // 컬렉션 추가
+    collectionReference
+        .doc(documentId)
+        .set({
+      'register' : false,
+      'agreement' : false,
+    })
+        .then((documentReference) {
+      print('컬렉션 추가 완료');
+    })
+        .catchError((error) {
+      print('컬렉션 추가 실패: $error');
+    });
+  }
+
   // Google Login
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -45,9 +76,7 @@ class _LoginPageState extends State<LoginPage> {
     UserCredential userCredential =
     await FirebaseAuth.instance.signInWithCredential(credential);
 
-    String uid = userCredential.user!.uid;
-    await saveUIDToFirebaseFirestore(uid);
-
+    await addCollection();
     return userCredential;
   }
 
