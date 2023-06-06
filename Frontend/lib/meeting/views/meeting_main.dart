@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seniorgy_app_project/const/color.dart';
+import 'MyMeetingRoom/my_meeting_rooms.dart';
 import 'createRooms/create_rooms.dart';
 
 class MeetingPage extends StatelessWidget {
@@ -28,6 +29,12 @@ class MeetingPage extends StatelessWidget {
       fontSize: 14,
       fontWeight: FontWeight.w300,
       fontFamily: 'Pretendard');
+
+  List<String> imgURL = [
+    'https://mobile.busan.com/nas/wcms/wcms_data/photos/2021/02/10/2021021009432993861_m.jpg',
+    'https://www.gjtnews.com/news/photo/202006/313185_56164_4730.jpg',
+    'https://thumb.mt.co.kr/06/2023/01/2023012511135323371_1.jpg/dims/optimize/',
+  ];
 
   List<String> roomTitle = [
     '부천 영웅봉사단',
@@ -112,7 +119,10 @@ class MeetingPage extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          print("부천 영웅봉사단");
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (BuildContext context) {
+                                return const MyMeetingRooms(title: '부천영웅봉사단', num: 8,);
+                              }));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(left: 12.0),
@@ -128,7 +138,7 @@ class MeetingPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 10.0),
                               Text(
-                                "부천 영웅봉사단",
+                                "부천영웅봉사단",
                                 style: subTextStyle,
                               ),
                             ],
@@ -244,9 +254,10 @@ class MeetingPage extends StatelessWidget {
                                                   Center(
                                                     child: ClipOval(
                                                       child: Image.network(
-                                                        'https://images.khan.co.kr/article/2022/06/05/l_2022060502000215600041221.jpg',
+                                                        imgURL[index],
                                                         width: 60,
                                                         height: 60,
+                                                        fit: BoxFit.cover,
                                                       ),
                                                     ),
                                                   ),
