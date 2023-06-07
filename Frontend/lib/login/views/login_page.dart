@@ -62,7 +62,6 @@ class _LoginPageState extends State<LoginPage> {
   //   });
   // }
 
-  // Google Login
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 

@@ -48,6 +48,14 @@ class MeetingPage extends StatelessWidget {
     '서구 영시들과 친목타임!',
   ];
 
+  List<String> roomTag = [
+    '봉사',
+    '봉사',
+    '동네친구',
+    '굿즈',
+    '스터디'
+  ];
+
   List<int> keys = [4, 5, 3];
 
   List<int> maxPeople = [8, 8, 6];
@@ -271,9 +279,25 @@ class MeetingPage extends StatelessWidget {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text(
-                                                          roomTitle[index],
-                                                          style: textTextStyle,
+                                                        Row(
+                                                          children: [
+                                                            Container(
+                                                              height: 23.0,
+                                                              decoration: BoxDecoration(
+                                                                color: subBlueColor,
+                                                                borderRadius: BorderRadius.circular(100.0),
+                                                              ),
+                                                              child: Center(child: Padding(
+                                                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                                                child: Text(roomTag[index], style: textTextStyle.copyWith(fontWeight: FontWeight.w600, fontSize: 12.0, color: Colors.white)),
+                                                              )),
+                                                            ),
+                                                            const SizedBox(width: 8.0),
+                                                            Text(
+                                                              roomTitle[index],
+                                                              style: textTextStyle,
+                                                            ),
+                                                          ],
                                                         ),
                                                         const SizedBox(
                                                             height: 5.0),
