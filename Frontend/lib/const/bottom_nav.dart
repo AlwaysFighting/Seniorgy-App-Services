@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:seniorgy_app_project/chat/screen/chat_screen.dart';
 
 import '../hideout/views/hideout_main.dart';
+import '../chat/screen/chat_screen.dart';
 import '../home/views/homepage.dart';
 import '../mypage/views/mypage_main.dart';
 import '../plaza/views/plaza_main.dart';
@@ -21,7 +23,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
 // 이동할 페이지 Widget
   final List<Widget> _widgetOptions = <Widget>[
-    const HomePage(),
+    const ChatScreen(),
     const PlazaPage(),
     const HideOutPage(),
     const MyPage(),
