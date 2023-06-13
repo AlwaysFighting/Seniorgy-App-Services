@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../const/color.dart';
+import '../../meeting/views/meeting_detail_page.dart';
 
 class ExplorationPage extends StatelessWidget {
   ExplorationPage({Key? key}) : super(key: key);
@@ -182,153 +183,161 @@ class ExplorationPage extends StatelessWidget {
                       5,
                       (index) => Padding(
                             padding: const EdgeInsets.only(bottom: 16.0),
-                            child: SizedBox(
-                              height: 120,
-                              width: double.infinity,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color(0xFFEBEBEB),
-                                    width: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (BuildContext context) {
+                                      return MeetingDetailPage(index: index);
+                                    }));
+                              },
+                              child: SizedBox(
+                                height: 120,
+                                width: double.infinity,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: const Color(0xFFEBEBEB),
+                                      width: 1,
+                                    ),
+                                    color: null,
+                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  color: null,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 12.0),
-                                      child: Row(
-                                        children: [
-                                          Center(
-                                            child: ClipOval(
-                                              child: Image.network(
-                                                imgURL[index],
-                                                width: 60,
-                                                height: 60,
-                                                fit: BoxFit.cover,
+                                  child: Stack(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 12.0),
+                                        child: Row(
+                                          children: [
+                                            Center(
+                                              child: ClipOval(
+                                                child: Image.network(
+                                                  imgURL[index],
+                                                  width: 60,
+                                                  height: 60,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 14.0, top: 20.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      height: 23.0,
-                                                      decoration: BoxDecoration(
-                                                        color: subBlueColor,
-                                                        borderRadius: BorderRadius.circular(100.0),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 14.0, top: 20.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        height: 23.0,
+                                                        decoration: BoxDecoration(
+                                                          color: subBlueColor,
+                                                          borderRadius: BorderRadius.circular(100.0),
+                                                        ),
+                                                        child: Center(child: Padding(
+                                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                                          child: Text(roomTag[index], style: textTextStyle.copyWith(fontWeight: FontWeight.w600, fontSize: 12.0, color: Colors.white)),
+                                                        )),
                                                       ),
-                                                      child: Center(child: Padding(
-                                                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                                        child: Text(roomTag[index], style: textTextStyle.copyWith(fontWeight: FontWeight.w600, fontSize: 12.0, color: Colors.white)),
-                                                      )),
-                                                    ),
-                                                    const SizedBox(width: 8.0),
-                                                    Text(
-                                                      roomTitle[index],
-                                                      style: textTextStyle,
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(height: 5.0),
-                                                Text(
-                                                  roomSubTitle[index],
-                                                  style: subTextStyle.copyWith(
-                                                    fontWeight: FontWeight.w300,
-                                                    fontSize: 14.0,
+                                                      const SizedBox(width: 8.0),
+                                                      Text(
+                                                        roomTitle[index],
+                                                        style: textTextStyle,
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                                const SizedBox(height: 16.0),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 18.14,
-                                                      width: 18.14,
-                                                      child: Image.asset(
-                                                        "assets/images/Meeting/People.png",
-                                                        fit: BoxFit.cover,
-                                                      ),
+                                                  const SizedBox(height: 5.0),
+                                                  Text(
+                                                    roomSubTitle[index],
+                                                    style: subTextStyle.copyWith(
+                                                      fontWeight: FontWeight.w300,
+                                                      fontSize: 14.0,
                                                     ),
-                                                    const SizedBox(width: 5.0),
-                                                    RichText(
-                                                      text: TextSpan(
-                                                        children: [
-                                                          TextSpan(
-                                                            text:
-                                                                '${peoples[index]}/${maxPeople[index]}',
-                                                            style:
-                                                                const TextStyle(
-                                                              color: Color(
-                                                                  0xFF878787),
-                                                              fontSize: 12.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
+                                                  ),
+                                                  const SizedBox(height: 16.0),
+                                                  Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 18.14,
+                                                        width: 18.14,
+                                                        child: Image.asset(
+                                                          "assets/images/Meeting/People.png",
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(width: 5.0),
+                                                      RichText(
+                                                        text: TextSpan(
+                                                          children: [
+                                                            TextSpan(
+                                                              text:
+                                                                  '${peoples[index]}/${maxPeople[index]}',
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Color(
+                                                                    0xFF878787),
+                                                                fontSize: 12.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
                                                             ),
-                                                          ),
-                                                          const TextSpan(
-                                                            text: '명',
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF878787),
-                                                              fontSize: 12.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w300,
+                                                            const TextSpan(
+                                                              text: '명',
+                                                              style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF878787),
+                                                                fontSize: 12.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                    const SizedBox(width: 18),
-                                                    SizedBox(
-                                                      height: 12.85,
-                                                      width: 7.87,
-                                                      child: Image.asset(
-                                                        "assets/images/Meeting/Key.png",
-                                                        fit: BoxFit.cover,
+                                                      const SizedBox(width: 18),
+                                                      SizedBox(
+                                                        height: 12.85,
+                                                        width: 7.87,
+                                                        child: Image.asset(
+                                                          "assets/images/Meeting/Key.png",
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    const SizedBox(width: 4.0),
-                                                    Text(
-                                                      '${keys[index]}',
-                                                      style: const TextStyle(
-                                                        color:
-                                                            Color(0xFF878787),
-                                                        fontSize: 12.0,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                      ),
-                                                    )
-                                                  ],
-                                                )
-                                              ],
+                                                      const SizedBox(width: 4.0),
+                                                      Text(
+                                                        '${keys[index]}',
+                                                        style: const TextStyle(
+                                                          color:
+                                                              Color(0xFF878787),
+                                                          fontSize: 12.0,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Positioned(
-                                      right: 0,
-                                      bottom: 0,
-                                      child: SizedBox(
-                                        width: characterWidth[index],
-                                        height: characterHeight[index],
-                                        child: Image.asset(
-                                          characterImage[index],
-                                          fit: BoxFit.cover,
+                                          ],
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Positioned(
+                                        right: 0,
+                                        bottom: 0,
+                                        child: SizedBox(
+                                          width: characterWidth[index],
+                                          height: characterHeight[index],
+                                          child: Image.asset(
+                                            characterImage[index],
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
