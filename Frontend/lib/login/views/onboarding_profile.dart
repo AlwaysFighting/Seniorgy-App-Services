@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seniorgy_app_project/login/views/onboarding_area.dart';
@@ -50,6 +51,19 @@ class _OnBoardingProfileState extends State<OnBoardingProfile> {
         _selectedImage = File(pickedImage.path);
       });
     }
+  }
+
+  final FirebaseStorage storage = FirebaseStorage.instance;
+
+  Future<String> uploadImageToFirebase() async {
+    String imageName = _selectedImage!.path;
+    Reference storageReference = storage.ref().child('images/$imageName');
+    UploadTask uploadTask = storageReference.putFile(_selectedImage!);
+
+    TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+    String imageUrl = await taskSnapshot.ref.getDownloadURL();
+
+    return imageUrl;
   }
 
   @override
@@ -169,6 +183,7 @@ class _OnBoardingProfileState extends State<OnBoardingProfile> {
                 borderRadius: BorderRadius.circular(0.0)),
           ),
           onPressed: () {
+            uploadImageToFirebase();
             if (_selectedImage != null) {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (BuildContext context) {

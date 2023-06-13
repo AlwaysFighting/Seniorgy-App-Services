@@ -42,15 +42,14 @@ class _OnboardingFinish2PageState extends State<OnboardingFinish2Page> {
             Padding(
               padding: const EdgeInsets.only(left: 17.0),
               child: SizedBox(
-
                 child: Stack(
                   children: [
                     SizedBox(
                       height: 245,
-                      width: 409.94,
+                      width: double.infinity,
                       child: Image.asset(
                         "assets/images/Login/CompleteChat.png",
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ),
                     ),
                     Positioned(

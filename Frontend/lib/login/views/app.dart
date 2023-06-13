@@ -21,7 +21,6 @@ class AppBridgePage extends StatelessWidget {
             User? user = snapshot.data;
             if (user != null && user.uid.isNotEmpty) {
               CollectionReference userCollection = FirebaseFirestore.instance.collection('User');
-              print('user.uid : ${user.uid}');
               return StreamBuilder<DocumentSnapshot>(
                 stream: userCollection.doc(user.uid).snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {

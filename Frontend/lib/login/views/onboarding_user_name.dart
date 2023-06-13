@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:seniorgy_app_project/login/views/onboarding_profile.dart';
@@ -41,10 +43,37 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
     });
   }
 
+  Future<void> addCollection(String username) async {
+
+    var user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print('사용자가 인증되지 않았습니다.');
+      return;
+    }
+
+    String collectionPath = 'User';
+    String documentId = user.uid;
+
+    CollectionReference collectionReference =
+    FirebaseFirestore.instance.collection(collectionPath);
+
+    collectionReference
+        .doc(documentId)
+        .update({
+      'UserName': username,
+    })
+        .then((_) {
+      print('업데이트');
+    })
+        .catchError((error) {
+      print('컬렉션 추가 실패: $error');
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         setState(() {
           showFirstText = false;
@@ -238,6 +267,7 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
                 borderRadius: BorderRadius.circular(0.0)),
           ),
           onPressed: () {
+            addCollection(_textEditingController.text);
             if (_isNextButtonEnabled == true) {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (BuildContext context) {

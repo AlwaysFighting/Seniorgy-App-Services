@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/bottom_nav.dart';
@@ -19,6 +21,7 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
   }
 
   void _navigateToNextPage() {
+    updateRegisterField();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -27,6 +30,33 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
               )),
     );
   }
+
+  Future<void> updateRegisterField() async {
+    var user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print('사용자가 인증되지 않았습니다.');
+      return;
+    }
+
+    String collectionPath = 'User';
+    String documentId = user.uid;
+
+    CollectionReference collectionReference =
+    FirebaseFirestore.instance.collection(collectionPath);
+
+    collectionReference
+        .doc(documentId)
+        .update({
+      'register': true,
+    })
+        .then((_) {
+      print('필드 업데이트 완료');
+    })
+        .catchError((error) {
+      print('필드 업데이트 실패: $error');
+    });
+  }
+
 
   final subTextStyle = const TextStyle(
       color: Colors.white,
@@ -49,7 +79,7 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
           ),
           Positioned(
             bottom: 180,
-            left: 130,
+            left: 120,
             child: Text('저 너머의 관계로\n함께 나아가자! 얍!', style: subTextStyle),
           ),
         ],

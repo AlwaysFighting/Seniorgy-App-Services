@@ -34,16 +34,17 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  google_sign_in: ^6.1.3
+  google_sign_in: ^6.1.4
   firebase_core: ^2.13.0
   firebase_database: ^10.2.2
   cloud_firestore: ^4.8.0
   firebase_auth: ^4.6.2
-  image_picker: ^0.8.7+5
+  image_picker: ^0.8.8
   path_provider: ^2.0.15
   flutter_config: ^2.0.0
   kakao_flutter_sdk: ^1.4.3
   kakao_map_plugin: ^0.1.4
+  firebase_storage: ^11.2.2
 
 dev_dependencies:
   flutter_test:
@@ -70,13 +71,13 @@ flutter:
   assets:
     - assets/images/Navigation/
     - assets/images/Meeting/
-    - assets/images/MyPage/
-    - assets/images/Plaza/
     - assets/images/Const/
     - assets/images/Search/
     - assets/images/Picture/
     - assets/images/Login/
     - assets/images/Character/
+    - assets/images/Login/Category/
+    - assets/images/Login/GroupCategory/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
