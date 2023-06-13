@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:seniorgy_app_project/login/views/onboarding_finish1.dart';
 
 import '../../const/color.dart';
+import 'onboarding_user_activity.dart';
 
 class OnBoardingArea extends StatefulWidget {
   const OnBoardingArea({Key? key}) : super(key: key);
@@ -145,6 +145,9 @@ class _OnBoardingAreaState extends State<OnBoardingArea> {
                                       width: 163.0,
                                       height: 43.0,
                                       child: TextField(
+                                        onTap: () {
+
+                                        },
                                         onChanged: (value) {
                                           _updateText1State();
                                           _updateLoginButtonState();
@@ -231,7 +234,7 @@ class _OnBoardingAreaState extends State<OnBoardingArea> {
             if (_isNextButtonEnabled == true) {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (BuildContext context) {
-                    return const OnboardingFinish1Page();
+                    return const OnboardingUserActivity();
                   }));
             }
           },
@@ -244,3 +247,70 @@ class _OnBoardingAreaState extends State<OnBoardingArea> {
     );
   }
 }
+
+/* class DropdownOverlay {
+  late CollectionReference<Map<String, dynamic>> regionCategory =
+  FirebaseFirestore.instance.collection('Regional');
+
+  static void show(BuildContext context) {
+    OverlayEntry? overlayEntry;
+
+    overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: 500,
+        left: 16,
+        right: 16,
+        child: Material(
+          elevation: 4,
+          child: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            future: DropdownOverlay().regionCategory.get(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (snapshot.hasData) {
+                Map<String, dynamic> data =
+                snapshot.data?.data() as Map<String, dynamic>;
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: docs.length,
+                  itemBuilder: (context, index) {
+                    final data = docs[index].data();
+                    final formattedData = data.entries
+                        .map((entry) => '${entry.key}: ${entry.value}')
+                        .join(', ');
+                    return ListTile(
+                      title: Text(
+                        formattedData,
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      onTap: () {
+                        // 선택된 항목 처리
+                        if (data.isNotEmpty) {
+                          print('Selected item: $data');
+                        }
+                        overlayEntry?.remove();
+                      },
+                    );
+                  },
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context)!.insert(overlayEntry);
+  }
+}
+*/
+
+
+
+
+
+
