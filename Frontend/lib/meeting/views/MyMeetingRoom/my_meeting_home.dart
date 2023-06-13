@@ -423,12 +423,15 @@ class _MyMeetingHomeState extends State<MyMeetingHome> {
                                                 height: 17.02,
                                                 width: 17.02,
                                                 child: Center(
-                                                  child: SizedBox(
-                                                    height: 9.36,
-                                                    width: 9.36,
-                                                    child: Image.asset(
-                                                      "assets/images/Meeting/KingIcon.png",
-                                                      fit: BoxFit.cover,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(right: 1.0, bottom: 1),
+                                                    child: SizedBox(
+                                                      height: 9.36,
+                                                      width: 9.36,
+                                                      child: Image.asset(
+                                                        "assets/images/Meeting/KingIcon.png",
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),

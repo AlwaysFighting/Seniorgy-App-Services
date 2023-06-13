@@ -17,7 +17,7 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 5), _navigateToNextPage);
+    Timer(const Duration(seconds: 2), _navigateToNextPage);
   }
 
   void _navigateToNextPage() {
