@@ -44,7 +44,6 @@ dependencies:
   flutter_config: ^2.0.0
   kakao_flutter_sdk: ^1.4.3
   kakao_map_plugin: ^0.1.4
-  modal_progress_hud_nsn: ^0.4.0
 
 dev_dependencies:
   flutter_test:

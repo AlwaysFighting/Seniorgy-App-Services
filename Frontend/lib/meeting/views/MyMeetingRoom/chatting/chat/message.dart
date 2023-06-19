@@ -15,11 +15,6 @@ class Messages extends StatelessWidget {
           .orderBy('time', descending: true)
           .snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-        if(snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child : CircularProgressIndicator(),
-          );
-        }
         final chatDocs = snapshot.data!.docs;
 
         return ListView.builder(
