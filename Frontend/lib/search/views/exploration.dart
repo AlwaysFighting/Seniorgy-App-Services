@@ -30,7 +30,7 @@ class ExplorationPage extends StatelessWidget {
       fontSize: 14,
       fontWeight: FontWeight.w300,
       fontFamily: 'Pretendard');
-  
+
   List<String> characterImage = [
     'assets/images/Character/Ch1.png',
     'assets/images/Character/Ch2.png',

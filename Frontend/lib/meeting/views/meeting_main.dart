@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seniorgy_app_project/const/color.dart';
+import '../../const/bottom_nav.dart';
 import 'MyMeetingRoom/my_meeting_rooms.dart';
 import 'createRooms/create_rooms.dart';
 
@@ -319,7 +320,7 @@ class MeetingPage extends StatelessWidget {
                                                               width: 18.14,
                                                               child:
                                                                   Image.asset(
-                                                                "assets/images/Meeting/People.png",
+                                                                "assets/images/Meeting/People_Grey.png",
                                                                 fit: BoxFit
                                                                     .cover,
                                                               ),
@@ -417,7 +418,10 @@ class MeetingPage extends StatelessWidget {
                           width: double.infinity,
                           child: OutlinedButton(
                             onPressed: () {
-                              print("더 보러가기");
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const BottomNavigation(currentIndex: 0)),
+                              );
                             },
                             style: OutlinedButton.styleFrom(
                               side: const BorderSide(color: Color(0xFFEBEBEB)),
