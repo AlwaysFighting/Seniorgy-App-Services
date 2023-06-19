@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +14,9 @@ class OnBoardingProfile extends StatefulWidget {
 }
 
 class _OnBoardingProfileState extends State<OnBoardingProfile> {
+
+  final user = FirebaseAuth.instance.currentUser;
+
   final titleTextStyle = const TextStyle(
       color: Colors.white,
       fontSize: 30,
@@ -32,13 +36,6 @@ class _OnBoardingProfileState extends State<OnBoardingProfile> {
       fontFamily: 'Pretendard');
 
   final _textEditingController = TextEditingController();
-  bool _isNextButtonEnabled = false;
-
-  void _updateLoginButtonState() {
-    setState(() {
-      _isNextButtonEnabled = _textEditingController.text.isNotEmpty;
-    });
-  }
 
   File? _selectedImage;
 
@@ -55,14 +52,19 @@ class _OnBoardingProfileState extends State<OnBoardingProfile> {
 
   final FirebaseStorage storage = FirebaseStorage.instance;
 
-  Future<String> uploadImageToFirebase() async {
-    String imageName = _selectedImage!.path;
-    Reference storageReference = storage.ref().child('images/$imageName');
+  Future<String?> uploadImageToFirebase(String uid) async {
+    if (_selectedImage == null) {
+      return null;
+    }
+
+    String imageName = "Profile";
+    Reference storageReference = storage.ref().child('users/$uid/images/$imageName');
     UploadTask uploadTask = storageReference.putFile(_selectedImage!);
 
-    TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+    TaskSnapshot taskSnapshot = await uploadTask;
     String imageUrl = await taskSnapshot.ref.getDownloadURL();
 
+    print("이미지 업로드 완료");
     return imageUrl;
   }
 
@@ -183,7 +185,7 @@ class _OnBoardingProfileState extends State<OnBoardingProfile> {
                 borderRadius: BorderRadius.circular(0.0)),
           ),
           onPressed: () {
-            uploadImageToFirebase();
+            uploadImageToFirebase(user?.uid ?? "");
             if (_selectedImage != null) {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (BuildContext context) {

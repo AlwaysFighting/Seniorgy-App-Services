@@ -48,6 +48,8 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
         .doc(documentId)
         .update({
       'register': true,
+      'signupTime':Timestamp.now(),
+      'myMeetingRoom' : 0,
     })
         .then((_) {
       print('필드 업데이트 완료');
