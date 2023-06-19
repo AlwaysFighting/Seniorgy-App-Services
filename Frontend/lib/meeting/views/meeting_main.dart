@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:seniorgy_app_project/const/color.dart';
 import '../../const/bottom_nav.dart';
@@ -77,6 +79,30 @@ class MeetingPage extends StatelessWidget {
     50.93, 27.9, 45.77
   ];
 
+  final user = FirebaseAuth.instance.currentUser;
+
+  Future<void> updateRegisterField() async {
+    var user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print('사용자가 인증되지 않았습니다.');
+      return;
+    }
+
+    String collectionPath = 'User';
+    String documentId = user.uid;
+
+    CollectionReference collectionReference =
+    FirebaseFirestore.instance.collection(collectionPath);
+
+    collectionReference
+        .doc(documentId)
+        .collection('MeetingRoom')
+        .doc('1')
+        .set({
+      'field1': 1
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,136 +136,149 @@ class MeetingPage extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Text("내가 참여중인 모임", style: titleTextStyle),
-              ),
-              const SizedBox(height: 28.0),
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return const MyMeetingRooms(title: '부천영웅봉사단', num: 8,);
-                              }));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: Column(
-                            children: [
-                              ClipOval(
-                                child: Image.network(
-                                  'https://mobile.busan.com/nas/wcms/wcms_data/photos/2021/02/10/2021021009432993861_m.jpg',
-                                  width: 92,
-                                  height: 92,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              const SizedBox(height: 10.0),
-                              Text(
-                                "부천영웅봉사단",
-                                style: subTextStyle,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          print("대전친목방");
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: Column(
-                            children: [
-                              ClipOval(
-                                child: Image.network(
-                                  'https://cdn.gukjenews.com/news/photo/202209/2558912_2563317_3812.jpg',
-                                  width: 92,
-                                  height: 92,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              const SizedBox(height: 10.0),
-                              Text(
-                                "대전친목방",
-                                style: subTextStyle,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 15),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return CreateRoomSettings();
-                              }));
-                        },
-                        child: Column(
-                          children: [
-                            Stack(
-                              children: [
-                                Container(
-                                  width: 92.0,
-                                  height: 92.0,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0x1001CFFE),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Center(
-                                    child: Image.asset(
-                                      'assets/images/Meeting/Plus.png',
-                                      width: 36,
-                                      height: 36,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10.0),
-                            Text(
-                              "방 만들기",
-                              style: subTextStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 28.0),
-              const CustomDivider(),
-              const SizedBox(height: 40.0),
-              Column(
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('User')
+            .doc(user?.uid ?? "")
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
+          final userData = snapshot.data?.data() as Map<String, dynamic>?;
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("영웅앓이님을 위한 추천",
-                            style: titleTextStyle.copyWith(
-                                fontWeight: FontWeight.w500)),
-                        const SizedBox(height: 24.0),
-                        Column(
-                          children: List.generate(
-                              3,
-                              (index) => Padding(
+                    child: Text("내가 참여중인 모임", style: titleTextStyle),
+                  ),
+                  const SizedBox(height: 28.0),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (BuildContext context) {
+                                    return const MyMeetingRooms(title: '부천영웅봉사단', num: 8,);
+                                  }));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: Column(
+                                children: [
+                                  ClipOval(
+                                    child: Image.network(
+                                      'https://mobile.busan.com/nas/wcms/wcms_data/photos/2021/02/10/2021021009432993861_m.jpg',
+                                      width: 92,
+                                      height: 92,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  Text(
+                                    "부천영웅봉사단",
+                                    style: subTextStyle,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              print("대전친목방");
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: Column(
+                                children: [
+                                  ClipOval(
+                                    child: Image.network(
+                                      'https://cdn.gukjenews.com/news/photo/202209/2558912_2563317_3812.jpg',
+                                      width: 92,
+                                      height: 92,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  Text(
+                                    "대전친목방",
+                                    style: subTextStyle,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 15),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (BuildContext context) {
+                                    return CreateRoomSettings();
+                                  }));
+                            },
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: 92.0,
+                                      height: 92.0,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0x1001CFFE),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Center(
+                                        child: Image.asset(
+                                          'assets/images/Meeting/Plus.png',
+                                          width: 36,
+                                          height: 36,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10.0),
+                                Text(
+                                  "방 만들기",
+                                  style: subTextStyle,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 28.0),
+                  const CustomDivider(),
+                  const SizedBox(height: 40.0),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("'${userData?['UserName']}' 님을 위한 추천",
+                                style: titleTextStyle.copyWith(
+                                    fontWeight: FontWeight.w500)),
+                            const SizedBox(height: 24.0),
+                            Column(
+                              children: List.generate(
+                                  3,
+                                      (index) => Padding(
                                     padding:
-                                        const EdgeInsets.only(bottom: 16.0),
+                                    const EdgeInsets.only(bottom: 16.0),
                                     child: SizedBox(
                                       height: 120,
                                       width: double.infinity,
@@ -251,7 +290,7 @@ class MeetingPage extends StatelessWidget {
                                           ),
                                           color: null,
                                           borderRadius:
-                                              BorderRadius.circular(8.0),
+                                          BorderRadius.circular(8.0),
                                         ),
                                         child: Stack(
                                           children: [
@@ -272,13 +311,13 @@ class MeetingPage extends StatelessWidget {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            left: 14.0,
-                                                            top: 20.0),
+                                                    const EdgeInsets.only(
+                                                        left: 14.0,
+                                                        top: 20.0),
                                                     child: Column(
                                                       crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
+                                                      CrossAxisAlignment
+                                                          .start,
                                                       children: [
                                                         Row(
                                                           children: [
@@ -307,7 +346,7 @@ class MeetingPage extends StatelessWidget {
                                                           style: subTextStyle
                                                               .copyWith(
                                                             fontWeight:
-                                                                FontWeight.w300,
+                                                            FontWeight.w300,
                                                             fontSize: 14.0,
                                                           ),
                                                         ),
@@ -319,7 +358,7 @@ class MeetingPage extends StatelessWidget {
                                                               height: 18.14,
                                                               width: 18.14,
                                                               child:
-                                                                  Image.asset(
+                                                              Image.asset(
                                                                 "assets/images/Meeting/People_Grey.png",
                                                                 fit: BoxFit
                                                                     .cover,
@@ -332,29 +371,29 @@ class MeetingPage extends StatelessWidget {
                                                                 children: [
                                                                   TextSpan(
                                                                     text:
-                                                                        '${peoples[index]}/${maxPeople[index]}',
+                                                                    '${peoples[index]}/${maxPeople[index]}',
                                                                     style:
-                                                                        const TextStyle(
+                                                                    const TextStyle(
                                                                       color: Color(
                                                                           0xFF878787),
                                                                       fontSize:
-                                                                          12.0,
+                                                                      12.0,
                                                                       fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
+                                                                      FontWeight
+                                                                          .w500,
                                                                     ),
                                                                   ),
                                                                   const TextSpan(
                                                                     text: '명',
                                                                     style:
-                                                                        TextStyle(
+                                                                    TextStyle(
                                                                       color: Color(
                                                                           0xFF878787),
                                                                       fontSize:
-                                                                          12.0,
+                                                                      12.0,
                                                                       fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
+                                                                      FontWeight
+                                                                          .w300,
                                                                     ),
                                                                   ),
                                                                 ],
@@ -366,7 +405,7 @@ class MeetingPage extends StatelessWidget {
                                                               height: 12.85,
                                                               width: 7.87,
                                                               child:
-                                                                  Image.asset(
+                                                              Image.asset(
                                                                 "assets/images/Meeting/Key.png",
                                                                 fit: BoxFit
                                                                     .cover,
@@ -377,13 +416,13 @@ class MeetingPage extends StatelessWidget {
                                                             Text(
                                                               '${keys[index]}',
                                                               style:
-                                                                  const TextStyle(
+                                                              const TextStyle(
                                                                 color: Color(
                                                                     0xFF878787),
                                                                 fontSize: 12.0,
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
+                                                                FontWeight
+                                                                    .w300,
                                                               ),
                                                             )
                                                           ],
@@ -411,41 +450,43 @@ class MeetingPage extends StatelessWidget {
                                       ),
                                     ),
                                   )).toList(),
-                        ),
-                        const SizedBox(height: 16.0),
-                        SizedBox(
-                          height: 48.0,
-                          width: double.infinity,
-                          child: OutlinedButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => const BottomNavigation(currentIndex: 0)),
-                              );
-                            },
-                            style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: Color(0xFFEBEBEB)),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            const SizedBox(height: 16.0),
+                            SizedBox(
+                              height: 48.0,
+                              width: double.infinity,
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const BottomNavigation(currentIndex: 0)),
+                                  );
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  side: const BorderSide(color: Color(0xFFEBEBEB)),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  elevation: 0,
+                                ),
+                                child: Text(
+                                  "더 보러가기",
+                                  style: subTextStyle.copyWith(
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ),
-                              elevation: 0,
                             ),
-                            child: Text(
-                              "더 보러가기",
-                              style: subTextStyle.copyWith(
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 13.0),
                 ],
               ),
-              const SizedBox(height: 13.0),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

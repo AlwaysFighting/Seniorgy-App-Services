@@ -129,7 +129,7 @@ class MyPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 25.0),
+                        padding: const EdgeInsets.only(left: 55.0, right: 45.0, top: 25.0),
                         child: Column(
                           children: [
                             const Text("내 모임방", style: subTextTextStyle),
@@ -159,7 +159,7 @@ class MyPage extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 44.0, right: 48.0, top: 25.0),
+                        padding: const EdgeInsets.only(left: 44.0, right: 55.0, top: 25.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -179,7 +179,7 @@ class MyPage extends StatelessWidget {
       ),
     );
   }
-  
+
   int calculateDaysSinceSignUp(Timestamp signupTime) {
     final currentTime = Timestamp.now();
     final difference = currentTime.toDate().difference(signupTime.toDate());

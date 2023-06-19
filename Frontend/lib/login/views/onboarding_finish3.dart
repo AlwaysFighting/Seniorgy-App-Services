@@ -24,10 +24,7 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
     updateRegisterField();
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-          builder: (context) => const BottomNavigation(
-                currentIndex: 0,
-              )),
+      MaterialPageRoute(builder: (context) => const BottomNavigation(currentIndex: 0)),
     );
   }
 
@@ -57,8 +54,15 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
         .catchError((error) {
       print('필드 업데이트 실패: $error');
     });
-  }
 
+    // collectionReference
+    //     .doc(documentId)
+    //     .collection('MeetingRoom')
+    //     .doc('1')
+    //     .set({
+    //   'field1': 1
+    // });
+  }
 
   final subTextStyle = const TextStyle(
       color: Colors.white,
