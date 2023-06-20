@@ -294,7 +294,7 @@ class _MeetingDetailPageState extends State<MeetingDetailPage> {
                                     Navigator.of(context).pop();
                                   },
                                   child: Container(
-                                    width: MediaQuery.of(context).size.width/3.2,
+                                    width: MediaQuery.of(context).size.width/3.5,
                                     height: 40,
                                     decoration: const BoxDecoration(
                                       color: Color(0xFFDBDBDC),
@@ -310,7 +310,7 @@ class _MeetingDetailPageState extends State<MeetingDetailPage> {
                                     Navigator.of(context).pop();
                                   },
                                   child: Container(
-                                    width: MediaQuery.of(context).size.width/3.2,
+                                    width: MediaQuery.of(context).size.width/3.5,
                                     height: 40,
                                     decoration: const BoxDecoration(
                                       color: Colors.black,
