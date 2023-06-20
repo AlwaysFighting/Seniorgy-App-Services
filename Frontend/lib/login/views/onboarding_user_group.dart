@@ -73,7 +73,7 @@ class _OnboardingUserGroupState extends State<OnboardingUserGroup> {
             ),
             const SizedBox(height: 73.0),
             Padding(
-              padding: const EdgeInsets.only(left: 68.0, right: 43.68),
+              padding: const EdgeInsets.only(left: 90.0, right: 43.68),
               child: SizedBox(
                 height: 328,
                 width: double.infinity,
@@ -147,7 +147,7 @@ class _OnboardingUserGroupState extends State<OnboardingUserGroup> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 47.0, right: 47.0),
+              padding: const EdgeInsets.only(left: 80.0, right: 47.0),
               child: SizedBox(
                 height: 155,
                 child: allChecked ? Image.asset(

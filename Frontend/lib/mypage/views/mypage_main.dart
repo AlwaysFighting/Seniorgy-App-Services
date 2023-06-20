@@ -87,7 +87,7 @@ class MyPage extends StatelessWidget {
               Center(
                 child: SizedBox(
                   height: 33,
-                  width: 97,
+                  width: 107,
                   child: Container(
                     decoration: BoxDecoration(
                       color: const Color(0xFFE6FAFF),
@@ -95,7 +95,7 @@ class MyPage extends StatelessWidget {
                     ),
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 9.0),
                         child: Row(
                           children: [
                             SizedBox(

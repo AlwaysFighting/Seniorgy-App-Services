@@ -94,13 +94,13 @@ class MeetingPage extends StatelessWidget {
     CollectionReference collectionReference =
     FirebaseFirestore.instance.collection(collectionPath);
 
-    collectionReference
-        .doc(documentId)
-        .collection('MeetingRoom')
-        .doc('1')
-        .set({
-      'field1': 1
-    });
+    // collectionReference
+    //     .doc(documentId)
+    //     .collection('MeetingRoom')
+    //     .doc('1')
+    //     .set({
+    //   'field1': 1
+    // });
   }
 
   @override

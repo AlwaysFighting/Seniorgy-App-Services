@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../const/color.dart';
 import '../../../const/custom_black_back.dart';
-import 'create_final_room.dart';
+import 'create_room_meeting.dart';
 
 class SettingRooms extends StatefulWidget {
   const SettingRooms({Key? key}) : super(key: key);
@@ -12,6 +12,7 @@ class SettingRooms extends StatefulWidget {
 }
 
 class _SettingRoomsState extends State<SettingRooms> {
+
   final titleTextStyle = const TextStyle(
       color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600);
 
@@ -360,7 +361,7 @@ class _SettingRoomsState extends State<SettingRooms> {
                 if(_isNextButtonEnabled == true) {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (BuildContext context) {
-                        return const FinalCreateRoomSteps();
+                        return const CreateRoomMeeting();
                       }));
                 }
               },

@@ -75,7 +75,7 @@ class _OnboardingFinish2PageState extends State<OnboardingFinish2Page> {
                               ),
                             ),
                             const SizedBox(height: 5.0),
-                            Text('함께 친굴들을 만나러 가봐요!', style: subTextStyle),
+                            Text('함께 친구들을 만나러 가봐요!', style: subTextStyle),
                           ],
                         ),
                       ),
