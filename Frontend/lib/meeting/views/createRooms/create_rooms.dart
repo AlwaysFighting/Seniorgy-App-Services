@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../const/color.dart';
@@ -46,6 +48,36 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
 
   bool _isNextButtonEnabled = false;
   int selectedGridIndex = -1;
+
+  Future<void> updateRegisterField(int roomID, int ) async {
+    var user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print('사용자가 인증되지 않았습니다.');
+      return;
+    }
+
+    String collectionPath = 'User';
+    String documentId = user.uid;
+
+    CollectionReference collectionReference =
+    FirebaseFirestore.instance.collection(collectionPath);
+
+    collectionReference
+        .doc(documentId)
+        .collection('TemporaryRoom')
+        .doc('TemporaryVar')
+        .update({
+      "id" : 0,
+
+    })
+        .then((_) {
+      print('필드 업데이트 완료');
+    })
+        .catchError((error) {
+      print('필드 업데이트 실패: $error');
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
