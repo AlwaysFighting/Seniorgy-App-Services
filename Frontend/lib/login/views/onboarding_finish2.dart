@@ -96,7 +96,7 @@ class _OnboardingFinish2PageState extends State<OnboardingFinish2Page> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         width: double.infinity,
         height: 72.0,
         child: ElevatedButton(

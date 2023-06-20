@@ -22,9 +22,10 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
 
   void _navigateToNextPage() {
     updateRegisterField();
-    Navigator.pushReplacement(
+    Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const BottomNavigation(currentIndex: 0)),
+      MaterialPageRoute(builder: (context) => const BottomNavigation(currentIndex: 1)),
+          (route) => false,
     );
   }
 

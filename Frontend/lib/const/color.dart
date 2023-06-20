@@ -7,6 +7,7 @@ const subBlueColor = Color(0xFF01CFFE);
 
 // 버튼 컬러
 const buttonDisabledColor = Color(0xFFD4E2FD);
+const buttonGreyColor = Color(0xFFDBDBDC);
 
 // 텍스트 컬러
 const blackTextColor = Color(0xFF222122);

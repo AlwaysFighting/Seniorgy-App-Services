@@ -18,13 +18,30 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
   final subTextStyle = const TextStyle(
       color: grey2TextColor, fontSize: 14, fontWeight: FontWeight.w400);
 
-  List<String> titleList = ['동네 친구', '봉사', '굿즈', '투어', '스터디'];
-  List<String> imgList = [
-    'assets/images/Meeting/Smile.png',
-    'assets/images/Meeting/Volunteer.png',
-    'assets/images/Meeting/Goods.png',
-    'assets/images/Meeting/Tour.png',
-    'assets/images/Meeting/Study.png'
+  List<String> titleList = ['동네친구', '봉사', '굿즈', '투어', '스터디'];
+
+  List<String> colorImgList = [
+    'assets/images/Meeting/Neighbor_Color.png',
+    'assets/images/Meeting/Volunteer_Color.png',
+    'assets/images/Meeting/Gift_Color.png',
+    'assets/images/Meeting/Tour_Color.png',
+    'assets/images/Meeting/Study_Color.png'
+  ];
+
+  List<String> unSelectedImgList = [
+    'assets/images/Meeting/Neighbor_Grey.png',
+    'assets/images/Meeting/Volunteer_Grey.png',
+    'assets/images/Meeting/Gift_Grey.png',
+    'assets/images/Meeting/Tour_Grey.png',
+    'assets/images/Meeting/Study_Grey.png'
+  ];
+
+  List<String> selectedImgList = [
+    'assets/images/Meeting/Neighbor_White.png',
+    'assets/images/Meeting/Volunteer_White.png',
+    'assets/images/Meeting/Gift_White.png',
+    'assets/images/Meeting/Tour_White.png',
+    'assets/images/Meeting/Study_White.png'
   ];
 
   bool _isNextButtonEnabled = false;
@@ -58,7 +75,7 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
                           width: MediaQuery.of(context).size.width / 8,
                           height: 6,
                           decoration: BoxDecoration(
-                              color: index == 0 ? mainColor : const Color(0xFFF4F4F4),
+                              color: index == 0 ? subBlueColor : const Color(0xFFF4F4F4),
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(index == 0 ? 8 : 0),
                                 bottomLeft: Radius.circular(index == 0 ? 8 : 0),
@@ -116,17 +133,29 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         color: selectedGridIndex == index
-                            ? mainColor
+                            ? subBlueColor
                             : const Color(0xFFFAFAFB),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            imgList[index],
-                            width: 50,
-                            height: 50,
-                          ),
+                          if (_isNextButtonEnabled == true)...[
+                            selectedGridIndex == index && _isNextButtonEnabled == true ? Image.asset(
+                              selectedImgList[index],
+                              width: 50,
+                              height: 50,
+                            ) : Image.asset(
+                              unSelectedImgList[index],
+                              width: 50,
+                              height: 50,
+                            ),
+                          ] else...[
+                            Image.asset(
+                              colorImgList[index],
+                              width: 50,
+                              height: 50,
+                            ),
+                          ],
                           const SizedBox(height: 16.0),
                           selectedGridIndex == index
                               ? Text(
@@ -145,12 +174,11 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
                 }),
               ),
               const SizedBox(height: 20.0),
-              NextButton(isNextButtonEnabled: _isNextButtonEnabled, selectedGridIndex: selectedGridIndex),
-              const SizedBox(height: 40.0),
             ],
           ),
         ),
       ),
+      bottomNavigationBar: NextButton(isNextButtonEnabled: _isNextButtonEnabled, selectedGridIndex: selectedGridIndex),
     );
   }
 }
@@ -168,21 +196,21 @@ class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 48,
       width: double.infinity,
+      height: 72,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0)),
+              borderRadius: BorderRadius.circular(0.0)),
           backgroundColor:
-              _isNextButtonEnabled ? mainColor : buttonDisabledColor,
+              _isNextButtonEnabled ? Colors.black : const Color(0xFFDBDBDC),
           elevation: 0,
         ),
         onPressed: () {
           if(_isNextButtonEnabled && selectedGridIndex == 0 || _isNextButtonEnabled && selectedGridIndex == 1) {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) {
-                  return CreateRoomLocation();
+                  return const CreateRoomLocation();
                 }));
           }
         },
@@ -190,7 +218,7 @@ class NextButton extends StatelessWidget {
           "다음",
           style: TextStyle(
             fontWeight: FontWeight.w700,
-            fontSize: 16.0,
+            fontSize: 20.0,
             color: Colors.white,
           ),
         ),
