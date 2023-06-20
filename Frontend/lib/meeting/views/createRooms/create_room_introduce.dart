@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import '../../../const/color.dart';
 import '../../../const/custom_black_back.dart';
@@ -31,6 +32,14 @@ class _IntroduceRoomsState extends State<IntroduceRooms> {
       _isNextButtonEnabled = _roomTitleController.text.isNotEmpty &&
           _introduceRoomController.text.isNotEmpty;
     });
+  }
+
+  hive() async {
+    await Hive.openBox('CreatedMTRooms');
+
+    var box = Hive.box('CreatedMTRooms');
+    box.put('title', _roomTitleController.text);
+    box.put('introduce', _introduceRoomController.text);
   }
 
   @override
@@ -250,6 +259,7 @@ class _IntroduceRoomsState extends State<IntroduceRooms> {
           autofocus: false,
           onPressed: () {
             if (_isNextButtonEnabled == true) {
+              hive();
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (BuildContext context) {
                 return const UploadPictureRooms();

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 import 'package:seniorgy_app_project/login/views/onboarding_profile.dart';
 import '../../const/color.dart';
 
@@ -43,6 +44,13 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
     });
   }
 
+  hive() async {
+    await Hive.openBox('CreatedMTRooms');
+
+    var box = Hive.box('CreatedMTRooms');
+    box.put('UserName', _textEditingController.text);
+  }
+
   Future<void> addCollection(String username) async {
 
     var user = FirebaseAuth.instance.currentUser;
@@ -63,6 +71,7 @@ class _OnBoardingUserNameState extends State<OnBoardingUserName> {
       'UserName': username,
     })
         .then((_) {
+      hive();
       print('업데이트');
     })
         .catchError((error) {

@@ -157,7 +157,7 @@ class ExplorationPage extends StatelessWidget {
                       ),
                       child: Column(
                         children: List.generate(
-                            5,
+                            documents.length,
                                 (index) => Padding(
                               padding: const EdgeInsets.only(bottom: 16.0),
                               child: GestureDetector(
@@ -307,10 +307,10 @@ class ExplorationPage extends StatelessWidget {
                                           right: 0,
                                           bottom: 0,
                                           child: SizedBox(
-                                            width: characterWidth[index],
-                                            height: characterHeight[index],
+                                            width: characterWidth[index % 5],
+                                            height: characterHeight[index % 5],
                                             child: Image.asset(
-                                              characterImage[index],
+                                              characterImage[index % 5],
                                               fit: BoxFit.cover,
                                             ),
                                           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import '../../../const/color.dart';
 import '../../../const/custom_black_back.dart';
@@ -45,6 +46,15 @@ class _CreateRoomMeetingState extends State<CreateRoomMeeting> {
     'assets/images/Meeting/Online_Color.png',
     'assets/images/Meeting/Both_Color.png',
   ];
+
+  hive() async {
+    await Hive.openBox('CreatedMTRooms');
+
+    var box = Hive.box('CreatedMTRooms');
+    box.put('meetingType', index);
+    var dla = box.get('meetingType');
+    print('meetingType: $dla');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -380,10 +390,13 @@ class _CreateRoomMeetingState extends State<CreateRoomMeeting> {
                 borderRadius: BorderRadius.circular(0.0)),
           ),
           onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return const FinalCreateRoomSteps();
-                }));
+            if(isChecked == true) {
+              hive();
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return const FinalCreateRoomSteps();
+                  }));
+            }
           },
           child: Text(
             '다음',

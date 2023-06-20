@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import '../../../const/color.dart';
 import '../../../const/custom_black_back.dart';
@@ -48,36 +49,37 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
 
   bool _isNextButtonEnabled = false;
   int selectedGridIndex = -1;
+  String keyword = "";
 
-  Future<void> updateRegisterField(int roomID, int ) async {
-    var user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      print('사용자가 인증되지 않았습니다.');
-      return;
-    }
+  hive() async {
+    await Hive.openBox('CreatedMTRooms');
 
-    String collectionPath = 'User';
-    String documentId = user.uid;
-
-    CollectionReference collectionReference =
-    FirebaseFirestore.instance.collection(collectionPath);
-
-    collectionReference
-        .doc(documentId)
-        .collection('TemporaryRoom')
-        .doc('TemporaryVar')
-        .update({
-      "id" : 0,
-
-    })
-        .then((_) {
-      print('필드 업데이트 완료');
-    })
-        .catchError((error) {
-      print('필드 업데이트 실패: $error');
-    });
-
+    var box = Hive.box('CreatedMTRooms');
+    box.put('KeyWord', titleList[selectedGridIndex]);
   }
+
+  // Future<void> updateRegisterField() async {
+  //   var user = FirebaseAuth.instance.currentUser;
+  //   if (user == null) {
+  //     print('사용자가 인증되지 않았습니다.');
+  //     return;
+  //   }
+  //
+  //   await Hive.openBox('CreatedMTRooms');
+  //
+  //   FirebaseFirestore.instance
+  //       .collection('MyCreatedRoom')
+  //       .get()
+  //       .then((QuerySnapshot snapshot) {
+  //     int documentCount = snapshot.size + 1;
+  //     var box = Hive.box('CreatedMTRooms');
+  //     box.put('ID', documentCount);
+  //     box.put('KeyWord', titleList[selectedGridIndex]);
+  //     var id = box.get('ID');
+  //     var KeyWord = box.get('KeyWord');
+  //     print('Name: $id, $KeyWord');
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -210,51 +212,37 @@ class _CreateRoomSettingsState extends State<CreateRoomSettings> {
           ),
         ),
       ),
-      bottomNavigationBar: NextButton(isNextButtonEnabled: _isNextButtonEnabled, selectedGridIndex: selectedGridIndex),
-    );
-  }
-}
-
-class NextButton extends StatelessWidget {
-  const NextButton({
-    super.key,
-    required bool isNextButtonEnabled,
-    required this.selectedGridIndex,
-  }) : _isNextButtonEnabled = isNextButtonEnabled;
-
-  final bool _isNextButtonEnabled;
-  final int selectedGridIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 72,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0.0)),
-          backgroundColor:
-              _isNextButtonEnabled ? Colors.black : const Color(0xFFDBDBDC),
-          elevation: 0,
-        ),
-        onPressed: () {
-          if(_isNextButtonEnabled && selectedGridIndex == 0 || _isNextButtonEnabled && selectedGridIndex == 1) {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return const CreateRoomLocation();
-                }));
-          }
-        },
-        child: const Text(
-          "다음",
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 20.0,
-            color: Colors.white,
+      bottomNavigationBar: SizedBox(
+        width: double.infinity,
+        height: 72,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0.0)),
+            backgroundColor:
+            _isNextButtonEnabled ? Colors.black : const Color(0xFFDBDBDC),
+            elevation: 0,
+          ),
+          onPressed: () {
+            if(_isNextButtonEnabled && selectedGridIndex == 0 || _isNextButtonEnabled && selectedGridIndex == 1) {
+              hive();
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return const CreateRoomLocation();
+                  }));
+            }
+          },
+          child: const Text(
+            "다음",
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
           ),
         ),
-      ),
+      )
     );
   }
 }
+

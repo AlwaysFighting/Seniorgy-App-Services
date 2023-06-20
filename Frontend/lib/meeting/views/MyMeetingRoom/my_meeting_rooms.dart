@@ -46,6 +46,7 @@ class _MyMeetingRoomsState extends State<MyMeetingRooms> {
     return Scaffold(
       backgroundColor: Colors.white,
       body:  DefaultTabController(
+        initialIndex: 2,
         length: myTabs.length,
         child: Scaffold(
           appBar: AppBar(

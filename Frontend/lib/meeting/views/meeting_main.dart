@@ -87,20 +87,6 @@ class MeetingPage extends StatelessWidget {
       print('사용자가 인증되지 않았습니다.');
       return;
     }
-
-    String collectionPath = 'User';
-    String documentId = user.uid;
-
-    CollectionReference collectionReference =
-    FirebaseFirestore.instance.collection(collectionPath);
-
-    // collectionReference
-    //     .doc(documentId)
-    //     .collection('MeetingRoom')
-    //     .doc('1')
-    //     .set({
-    //   'field1': 1
-    // });
   }
 
   @override
