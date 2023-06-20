@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 import '../../../const/color.dart';
 import '../../../const/custom_black_back.dart';
 import 'create_room_meeting.dart';
@@ -33,6 +34,15 @@ class _SettingRoomsState extends State<SettingRooms> {
         _isNextButtonEnabled = true;
       }
     });
+  }
+
+  hive() async {
+    await Hive.openBox('CreatedMTRooms');
+
+    var box = Hive.box('CreatedMTRooms');
+    box.put('maxMember', _count);
+    box.put('public', _isPublic);
+    box.put('password', _passwordController.text);
   }
 
   @override
@@ -359,6 +369,7 @@ class _SettingRoomsState extends State<SettingRooms> {
               autofocus: false,
               onPressed: () {
                 if(_isNextButtonEnabled == true) {
+                  hive();
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (BuildContext context) {
                         return const CreateRoomMeeting();

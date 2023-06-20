@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import '../../../const/color.dart';
 import '../../../const/custom_black_back.dart';
@@ -15,11 +18,23 @@ class CreateRoomLocation extends StatefulWidget {
 
 class _CreateRoomLocationState
     extends State<CreateRoomLocation> {
+
   final titleTextStyle = const TextStyle(
       color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600);
 
   final subTextStyle = const TextStyle(
       color: grey2TextColor, fontSize: 14, fontWeight: FontWeight.w400);
+
+  final double deptLat = 37.62915393610253;
+  final double deptLng = 127.09569185257587;
+
+  hive() async {
+    await Hive.openBox('CreatedMTRooms');
+
+    var box = Hive.box('CreatedMTRooms');
+    box.put('deptLat', deptLat);
+    box.put('deptLng', deptLng);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +114,7 @@ class _CreateRoomLocationState
               ),
             ),
           ),
-          const KakaoMapView(deptLat: 37.62915393610253, deptLng: 127.09569185257587,),
+          KakaoMapView(deptLat: deptLat, deptLng: deptLng,),
           Column(
             children: [
               Padding(
@@ -149,43 +164,33 @@ class _CreateRoomLocationState
           ),
         ],
       ),
-      bottomNavigationBar: const NextButton(),
-    );
-  }
-}
-
-class NextButton extends StatelessWidget {
-  const NextButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 72,
-      width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0)),
-          backgroundColor: Colors.black,
-          elevation: 0,
-        ),
-        onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (BuildContext context) {
-                return const IntroduceRooms();
-              }));
-        },
-        child: const Text(
-          "이 위치로 주소 설정하기",
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 20.0,
-            color: Colors.white,
+      bottomNavigationBar: SizedBox(
+        height: 72,
+        width: double.infinity,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0)),
+            backgroundColor: Colors.black,
+            elevation: 0,
+          ),
+          onPressed: () {
+            hive();
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return const IntroduceRooms();
+                }));
+          },
+          child: const Text(
+            "이 위치로 주소 설정하기",
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
           ),
         ),
-      ),
+      )
     );
   }
 }

@@ -46,6 +46,7 @@ dependencies:
   kakao_map_plugin: ^0.1.4
   firebase_storage: ^11.2.2
   intl: ^0.18.1
+  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:
