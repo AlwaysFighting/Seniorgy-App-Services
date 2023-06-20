@@ -23,6 +23,9 @@ class _IntroduceRoomsState extends State<IntroduceRooms> {
   final _introduceRoomController = TextEditingController();
   bool _isNextButtonEnabled = false;
 
+  bool isText1Read = true;
+  bool isText2Read = true;
+
   void _updateLoginButtonState() {
     setState(() {
       _isNextButtonEnabled = _roomTitleController.text.isNotEmpty &&
@@ -67,18 +70,19 @@ class _IntroduceRoomsState extends State<IntroduceRooms> {
                                     width: MediaQuery.of(context).size.width / 8,
                                     height: 6,
                                     decoration: BoxDecoration(
-                                      color: index == 0 || index == 1 || index == 2
-                                          ? mainColor
-                                          : const Color(0xFFF4F4F4),
+                                      color:
+                                          index == 0 || index == 1 || index == 2
+                                              ? subBlueColor
+                                              : const Color(0xFFF4F4F4),
                                       borderRadius: BorderRadius.only(
                                         topLeft:
-                                        Radius.circular(index == 0 ? 8 : 0),
+                                            Radius.circular(index == 0 ? 8 : 0),
                                         bottomLeft:
-                                        Radius.circular(index == 0 ? 8 : 0),
+                                            Radius.circular(index == 0 ? 8 : 0),
                                         topRight:
-                                        Radius.circular(index == 5 ? 8 : 0),
+                                            Radius.circular(index == 5 ? 8 : 0),
                                         bottomRight:
-                                        Radius.circular(index == 5 ? 8 : 0),
+                                            Radius.circular(index == 5 ? 8 : 0),
                                       ),
                                     ),
                                   ),
@@ -119,30 +123,55 @@ class _IntroduceRoomsState extends State<IntroduceRooms> {
                       SizedBox(
                         height: 47.0,
                         width: double.infinity,
-                        child: TextField(
-                          controller: _roomTitleController,
-                          onChanged: (value) {
-                            _updateLoginButtonState();
-                          },
-                          decoration: InputDecoration(
-                            hintText: "영웅 맛집 투어방",
-                            hintStyle: subTextStyle.copyWith(color: const Color(0xFF878787)),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Color(0xFFE8EBEF), width: 1.0),
-                              borderRadius: BorderRadius.circular(24),
+                        child: Stack(
+                          children: [
+                            TextField(
+                              controller: _roomTitleController,
+                              onChanged: (value) {
+                                if (value.length > 20) {
+                                  _roomTitleController.value = TextEditingValue(
+                                    text: value.substring(0, 20),
+                                    selection: const TextSelection.collapsed(offset: 20),
+                                  );
+                                }
+                                _updateLoginButtonState();
+                              },
+                              decoration: InputDecoration(
+                                hintText: "영웅 맛집 투어방",
+                                hintStyle: subTextStyle.copyWith(
+                                    color: const Color(0xFF878787)),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color(0xFFE8EBEF), width: 1.0),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)),
+                                  borderSide:
+                                      BorderSide(width: 1, color: subBlueColor),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 15.0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                fillColor: const Color(0xFFF4F6F8),
+                              ),
                             ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(24)),
-                              borderSide: BorderSide(width: 1, color: mainColor),
+                            Positioned(
+                              right: 16,
+                              top: 15,
+                              child: Text(
+                                "${_roomTitleController.text.length}/20",
+                                style: subTextStyle.copyWith(
+                                    color: const Color(0xFF878787),
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
-                            contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 15.0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            filled: true,
-                            fillColor: const Color(0xFFF4F6F8),
-                          ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 44.0),
@@ -154,31 +183,55 @@ class _IntroduceRoomsState extends State<IntroduceRooms> {
                       const SizedBox(height: 20.0),
                       SizedBox(
                         height: 200,
-                        child: TextField(
-                          maxLines: 200,
-                          controller: _introduceRoomController,
-                          onChanged: (value) {
-                            _updateLoginButtonState();
-                          },
-                          decoration: InputDecoration(
-                            hintText: "영웅이가 다녀간 맛집을 함께 투어해요! 행복이 2배!",
-                            hintStyle: subTextStyle.copyWith(color: const Color(0xFF878787)),
-                            isDense: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFE8EBEF), width: 1.0),
-                              borderRadius: BorderRadius.circular(24),
+                        child: Stack(
+                          children: [
+                            TextField(
+                              maxLines: 200,
+                              controller: _introduceRoomController,
+                              onChanged: (value) {
+                                if (value.length > 500) {
+                                  _introduceRoomController.value = TextEditingValue(
+                                    text: value.substring(0, 500),
+                                    selection: const TextSelection.collapsed(offset: 500),
+                                  );
+                                }
+                                _updateLoginButtonState();
+                              },
+                              decoration: InputDecoration(
+                                hintText: "영웅이가 다녀간 맛집을 함께 투어해요! 행복이 2배!",
+                                hintStyle: subTextStyle.copyWith(color: const Color(0xFF878787)),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color(0xFFE8EBEF), width: 1.0),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                                  borderSide:
+                                  BorderSide(width: 1, color: subBlueColor),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 15.0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                fillColor: const Color(0xFFF4F6F8),
+                              ),
                             ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(24)),
-                              borderSide: BorderSide(width: 1, color: mainColor),
+                            Positioned(
+                              bottom: 20.0,
+                              right: 16.0,
+                              child: Text(
+                                "${_introduceRoomController.text.length}/500",
+                                style: subTextStyle.copyWith(
+                                    color: const Color(0xFF878787),
+                                    fontSize: 12.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 15.0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            filled: true,
-                            fillColor: const Color(0xFFF4F6F8),
-                          ),
+                          ],
                         ),
                       ),
                     ],
@@ -186,42 +239,40 @@ class _IntroduceRoomsState extends State<IntroduceRooms> {
                 ),
               ),
               const SizedBox(height: 86.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20.0),
-                child: SizedBox(
-                  height: 48,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    autofocus: false,
-                    onPressed: () {
-                      if(_isNextButtonEnabled == true) {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) {
-                              return const UploadPictureRooms();
-                            }));
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      // 메인 컬러
-                      backgroundColor: _isNextButtonEnabled ? mainColor : buttonDisabledColor,
-                      // 버튼 안 텍스트 스타일
-                      textStyle: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16.0,
-                        color: Colors.white,
-                      ),
-                      minimumSize: const Size(double.infinity, 358),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0), // 모서리 둥글기 정도
-                      ),
-                      elevation: 0,
-                    ),
-                    child: const Text('다음'),
-                  ),
-                ),
-              ),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 72,
+        width: double.infinity,
+        child: ElevatedButton(
+          autofocus: false,
+          onPressed: () {
+            if (_isNextButtonEnabled == true) {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (BuildContext context) {
+                return const UploadPictureRooms();
+              }));
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            // 메인 컬러
+            backgroundColor:
+                _isNextButtonEnabled ? Colors.black : buttonGreyColor,
+            // 버튼 안 텍스트 스타일
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
+            minimumSize: const Size(double.infinity, 358),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0.0),
+            ),
+            elevation: 0,
+          ),
+          child: const Text('다음'),
         ),
       ),
     );

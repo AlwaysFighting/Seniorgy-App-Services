@@ -22,12 +22,10 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
 
   void _navigateToNextPage() {
     updateRegisterField();
-    Navigator.pushReplacement(
+    Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
-          builder: (context) => const BottomNavigation(
-                currentIndex: 0,
-              )),
+      MaterialPageRoute(builder: (context) => const BottomNavigation(currentIndex: 1)),
+          (route) => false,
     );
   }
 
@@ -48,6 +46,8 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
         .doc(documentId)
         .update({
       'register': true,
+      'signupTime':Timestamp.now(),
+      'myMeetingRoom' : 0,
     })
         .then((_) {
       print('필드 업데이트 완료');
@@ -55,8 +55,15 @@ class _OnboardingFinish3PageState extends State<OnboardingFinish3Page> {
         .catchError((error) {
       print('필드 업데이트 실패: $error');
     });
-  }
 
+    // collectionReference
+    //     .doc(documentId)
+    //     .collection('MeetingRoom')
+    //     .doc('1')
+    //     .set({
+    //   'field1': 1
+    // });
+  }
 
   final subTextStyle = const TextStyle(
       color: Colors.white,

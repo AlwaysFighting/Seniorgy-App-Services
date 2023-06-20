@@ -219,7 +219,7 @@ class _OnBoardingAreaState extends State<OnBoardingArea> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         width: double.infinity,
         height: 72.0,
         child: ElevatedButton(

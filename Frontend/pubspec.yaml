@@ -79,6 +79,7 @@ flutter:
     - assets/images/Character/
     - assets/images/Login/Category/
     - assets/images/Login/GroupCategory/
+    - assets/images/MyPage/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

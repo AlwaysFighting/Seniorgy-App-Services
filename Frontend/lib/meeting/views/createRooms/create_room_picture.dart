@@ -22,7 +22,7 @@ class _UploadPictureRoomsState extends State<UploadPictureRooms> {
   final subTextStyle = const TextStyle(
       color: grey2TextColor, fontSize: 14, fontWeight: FontWeight.w400);
 
-  bool _isNextButtonEnabled = true;
+  bool _isNextButtonEnabled = false;
 
   File? _selectedImage;
 
@@ -33,6 +33,7 @@ class _UploadPictureRoomsState extends State<UploadPictureRooms> {
     if (pickedImage != null) {
       setState(() {
         _selectedImage = File(pickedImage.path);
+        _isNextButtonEnabled = true;
       });
     }
   }
@@ -69,7 +70,7 @@ class _UploadPictureRoomsState extends State<UploadPictureRooms> {
                                 height: 6,
                                 decoration: BoxDecoration(
                                   color: index == 0 || index == 1 || index == 2 || index == 3
-                                      ? mainColor
+                                      ? subBlueColor
                                       : const Color(0xFFF4F4F4),
                                   borderRadius: BorderRadius.only(
                                     topLeft:
@@ -149,42 +150,42 @@ class _UploadPictureRoomsState extends State<UploadPictureRooms> {
                     ),
                   ),
                   const SizedBox(height: 205.0),
-                  SizedBox(
-                    height: 48,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      autofocus: false,
-                      onPressed: () {
-                        if(_isNextButtonEnabled == true) {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return const SettingRooms();
-                              }));
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        // 메인 컬러
-                        backgroundColor: _isNextButtonEnabled ? mainColor : buttonDisabledColor,
-                        // 버튼 안 텍스트 스타일
-                        textStyle: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16.0,
-                          color: Colors.white,
-                        ),
-                        minimumSize: const Size(double.infinity, 358),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0), // 모서리 둥글기 정도
-                        ),
-                        elevation: 0,
-                      ),
-                      child: const Text('다음'),
-                    ),
-                  ),
                 ],
               ),
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 72,
+        width: double.infinity,
+        child: ElevatedButton(
+          autofocus: false,
+          onPressed: () {
+            if(_isNextButtonEnabled == true) {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return const SettingRooms();
+                  }));
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            // 메인 컬러
+            backgroundColor: _isNextButtonEnabled ? Colors.black : buttonGreyColor,
+            // 버튼 안 텍스트 스타일
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
+            minimumSize: const Size(double.infinity, 358),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0.0),
+            ),
+            elevation: 0,
+          ),
+          child: const Text('다음'),
+        ),
       ),
     );
   }

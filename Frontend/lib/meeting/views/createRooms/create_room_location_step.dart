@@ -53,7 +53,7 @@ class _CreateRoomLocationState
                                 height: 6,
                                 decoration: BoxDecoration(
                                   color: index == 0 || index == 1
-                                      ? mainColor
+                                      ? subBlueColor
                                       : const Color(0xFFF4F4F4),
                                   borderRadius: BorderRadius.only(
                                     topLeft:
@@ -118,7 +118,7 @@ class _CreateRoomLocationState
             padding: const EdgeInsets.only(left: 20.0, top: 16.0),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xFFE9F2FF),
+                color: const Color(0xFFF4F6F8),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               height: 35.0,
@@ -139,7 +139,7 @@ class _CreateRoomLocationState
                       Text(
                         "주소 직접 수정하기",
                         style: subTextStyle.copyWith(
-                            color: mainColor, fontSize: 12.0),
+                            color: mainOrangeColor, fontSize: 12.0),
                       )
                     ],
                   ),
@@ -147,12 +147,9 @@ class _CreateRoomLocationState
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 59.0),
-            child: NextButton(),
-          ),
         ],
       ),
+      bottomNavigationBar: const NextButton(),
     );
   }
 }
@@ -165,13 +162,13 @@ class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 48,
+      height: 72,
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0)),
-          backgroundColor: mainColor,
+              borderRadius: BorderRadius.circular(0)),
+          backgroundColor: Colors.black,
           elevation: 0,
         ),
         onPressed: () {
@@ -184,7 +181,7 @@ class NextButton extends StatelessWidget {
           "이 위치로 주소 설정하기",
           style: TextStyle(
             fontWeight: FontWeight.w700,
-            fontSize: 16.0,
+            fontSize: 20.0,
             color: Colors.white,
           ),
         ),
